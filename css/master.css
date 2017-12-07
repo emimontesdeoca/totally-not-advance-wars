@@ -1,0 +1,25 @@
+.theme-table,
+.theme {
+  margin: 0 auto;
+}
+
+.theme-table {
+  border: 1px solid black;
+  table-layout: fixed;
+}
+.theme {
+  background-image: url("../resources/maps/ice.png");
+  background-repeat: no-repeat;
+  width: 510px;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+td{
+    width: 26px;
+    height: 21px;
+}
