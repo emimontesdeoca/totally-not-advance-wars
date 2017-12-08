@@ -1,16 +1,20 @@
 .theme-table,
-.theme {
+.map-container {
   margin: 0 auto;
 }
 
 .theme-table {
   border: 1px solid black;
   table-layout: fixed;
+  border-collapse: collapse;
 }
-.theme {
+.map-container {
   background-image: url("../resources/maps/ice.png");
   background-repeat: no-repeat;
   width: 510px;
+  text-align: center;
+  float: left;
+  margin-left: Calc(40% - 200px);
 }
 
 body {
@@ -19,7 +23,42 @@ body {
   padding: 0;
 }
 
-td{
-    width: 26px;
-    height: 21px;
+td {
+  width: 27px;
+  height: 27px;
+  border: 1px solid black;
+}
+
+.character {
+  vertical-align: middle;
+}
+
+.stats-container {
+  width: 220px;
+  border: 1px solid black;
+  border-left: none;
+  height: 509px;
+  float: left;
+}
+
+.menu-container {
+  width: 729px;
+  border: 1px solid black;
+  float: left;
+  margin-left: 568px;
+  height: 150px;
+  border-top: none;
+}
+
+.notmove{
+  background-color: red;
+  opacity: 0.4;
+}
+.attack{
+  background-color: blue;
+  opacity: 0.4;
+}
+.move{
+  background-color: green;
+  opacity: 0.4;
 }
