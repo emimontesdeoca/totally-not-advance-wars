@@ -13,8 +13,7 @@
   background-repeat: no-repeat;
   width: 510px;
   text-align: center;
-  float: left;
-  margin-left: Calc(40% - 200px);
+  /* float: left; */
 }
 
 body {
@@ -33,32 +32,15 @@ td {
   vertical-align: middle;
 }
 
-.stats-container {
-  width: 220px;
-  border: 1px solid black;
-  border-left: none;
-  height: 509px;
-  float: left;
-}
-
-.menu-container {
-  width: 729px;
-  border: 1px solid black;
-  float: left;
-  margin-left: 568px;
-  height: 150px;
-  border-top: none;
-}
-
-.notmove{
+.notmove {
   background-color: red;
   opacity: 0.4;
 }
-.attack{
+.attack {
   background-color: blue;
   opacity: 0.4;
 }
-.move{
+.move {
   background-color: green;
   opacity: 0.4;
 }

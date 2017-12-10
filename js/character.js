@@ -72,6 +72,23 @@ const characters = [
   }
 ];
 
-function getInfoCharacter(name) {
-  return characters.filter(e => e.name == name);
+class character {
+  constructor(pos) {
+    let item = characters[Math.floor(Math.random() * characters.length)];
+    this.name = item.name;
+    this.hp = item.hp;
+    this.armor = item.armor;
+    this.attack = item.attack;
+    this.crit = item.crit;
+    this.moverange = item.moverange;
+    this.attackrange = item.attackrange;
+    this.source = item.source;
+    this.position = pos;
+  }
+  move(pos) {
+    this.position = pos;
+  }
+  attack(character) {
+    character.hp -= this.attack;
+  }
 }
