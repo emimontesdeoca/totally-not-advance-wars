@@ -53,6 +53,7 @@ function deleteCharactersOnMap() {
     td.removeAttribute("attack");
     td.removeAttribute("armor");
     td.removeAttribute("crit");
+    td.removeAttribute("player");
 
     var myNode = document.getElementById(td.id);
     while (myNode.firstChild) {
