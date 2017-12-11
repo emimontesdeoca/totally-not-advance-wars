@@ -14,6 +14,7 @@ function generateMap() {
       td.setAttribute("pos", numbertd);
       td.setAttribute("title", id);
       td.addEventListener("click", clearInformationMenu, false);
+      td.addEventListener("click", deleteClassesTd, false);
       td.addEventListener("mouseover", showCurrentGameInformation, false);
 
       numbertd++;
@@ -47,6 +48,7 @@ function renderCharacters(players) {
       img.setAttribute("crit", element.crit);
 
       img.addEventListener("click", showInformationInMenu, false);
+      img.addEventListener("click", showMovableTiles, false);
 
       td.appendChild(img);
 
@@ -57,6 +59,7 @@ function renderCharacters(players) {
       td.setAttribute("armor", element.armor);
       td.setAttribute("crit", element.crit);
       td.addEventListener("click", showInformationInMenu, false);
+      td.addEventListener("click", showMovableTiles, false);
     });
   });
 }
@@ -107,83 +110,79 @@ function getCharacterByPosition(players, pos) {
 }
 
 function showMovableTiles(e) {
-  var char = getCharacterByPosition;
-
+  var char = getCharacterByPosition(players, e.srcElement.id);
+  var tds = document.querySelectorAll("td");
+  var moverange = char.moverange;
+  var currpos = parseInt(e.srcElement.parentElement.getAttribute("pos"));
+  console.log(currpos);
   /// arriba
-  for (var index = 1; index <= moverange; index++) {
-    var i = currpos - 17 * index;
-    try {
-      tds[i].className = "move";
-    } catch (error) {}
+  // for (var index = 1; index <= moverange; index++) {
+  //   var i = currpos - 17 * index;
+  //   try {
+  //     tds[i].className = "move";
+  //   } catch (error) {}
 
-    for (let a = 1; a <= moverange - index; a++) {
-      let itemid = tds[i + a].id.substr(1);
-      if (itemid <= 16) {
-        try {
-          tds[i + a].className = "move";
-        } catch (error) {}
-      }
+  //   for (let a = 1; a <= moverange - index; a++) {
+  //     let itemid = tds[i + a].id.substr(1);
+  //     if (itemid <= 16) {
+  //       try {
+  //         tds[i + a].className = "move";
+  //       } catch (error) {}
+  //     }
 
-      // tds[i + a  + index].className = "notmove";
-    }
-    for (let a = moverange - index; a >= 1; a--) {
-      let itemid = tds[i - a].id.substr(1);
+  //     // tds[i + a  + index].className = "notmove";
+  //   }
+  //   for (let a = moverange - index; a >= 1; a--) {
+  //     let itemid = tds[i - a].id.substr(1);
 
-      try {
-        tds[i - a].className = "move";
-      } catch (error) {}
-      //   tds[i + a + 1].className = "notmove";
-    }
-  }
+  //     try {
+  //       tds[i - a].className = "move";
+  //     } catch (error) {}
+  //     //   tds[i + a + 1].className = "notmove";
+  //   }
+  // }
 
-  try {
-    tds[currpos - 17 * index].className = "notmove";
-  } catch (error) {}
+  // try {
+  //   tds[currpos - 17 * index].className = "notmove";
+  // } catch (error) {}
   // abajo
-  for (var index = 1; index <= moverange; index++) {
-    var i = currpos + 17 * index;
-    try {
-      tds[i].className = "move";
-    } catch (error) {}
+  // for (var index = 1; index <= moverange; index++) {
+  //   var i = currpos + 17 * index;
+  //   try {
+  //     tds[i].className = "move";
+  //   } catch (error) {}
 
-    for (let a = 1; a <= moverange - index; a++) {
-      try {
-        tds[i + a].className = "move";
-      } catch (error) {}
-      //   tds[i + a + 1].className = "notmove";
-    }
-    for (let a = moverange - index; a >= 1; a--) {
-      try {
-        tds[i - a].className = "move";
-      } catch (error) {}
-    }
-  }
+  //   for (let a = 1; a <= moverange - index; a++) {
+  //     try {
+  //       tds[i + a].className = "move";
+  //     } catch (error) {}
+  //     //   tds[i + a + 1].className = "notmove";
+  //   }
+  //   for (let a = moverange - index; a >= 1; a--) {
+  //     try {
+  //       tds[i - a].className = "move";
+  //     } catch (error) {}
+  //   }
+  // }
 
-  try {
-    tds[currpos + 17 * index].className = "notmove";
-  } catch (error) {}
   /// derecha
 
   for (let index = 0; index <= moverange; index++) {
-    let itemid = tds[currpos - index].id.substr(1);
-
-    if (itemid <= 16) {
+    // let itemid = tds[currpos - index].id.substr(1);
+    var cp = tds[currpos + index].id.charAt(0);
+    var mp = tds[currpos].id.charAt(0);
+    if (cp == mp) {
       tds[currpos + index].className = "move";
     }
   }
-  try {
-    tds[currpos + moverange + 1].className = "notmove";
-  } catch (error) {}
 
-  /// izquierda
+  // /// izquierda
 
   for (let index = moverange; index >= 0; index--) {
-    let itemid = tds[currpos - index].id.substr(1);
-    if (itemid >= 0) {
+    var cp = tds[currpos - index].id.charAt(0);
+    var mp = tds[currpos].id.charAt(0);
+    if (cp == mp) {
       tds[currpos - index].className = "move";
     }
   }
-  try {
-    tds[currpos - moverange - 1].className = "notmove";
-  } catch (error) {}
 }

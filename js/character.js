@@ -97,7 +97,11 @@ class character {
   move(pos) {
     this.position = pos;
   }
-  attack(character) {
+  attackCharacter(character) {
     character.hp -= this.attack;
   }
+}
+
+function getHpCharacter(name) {
+  return characters.filter(x => x.name === name)[0].hp;
 }

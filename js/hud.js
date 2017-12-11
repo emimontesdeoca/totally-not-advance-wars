@@ -14,7 +14,11 @@ function showInformationInMenu(e) {
   charid.setAttribute("char", e.srcElement.id);
   charimage.src = charinformation.face;
   charname.innerHTML = charinformation.name;
-  charhp.innerHTML = "Health: " + currentHP + "/" + charinformation.hp;
+  charhp.innerHTML =
+    "Health: " +
+    charinformation.hp +
+    "/" +
+    getHpCharacter(charinformation.name);
   charattack.innerHTML = "Attack: " + charinformation.attack;
   chararmor.innerHTML = "Armor: " + charinformation.armor;
   charcrit.innerHTML = "Critical: " + charinformation.crit + "%";

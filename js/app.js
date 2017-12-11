@@ -41,7 +41,7 @@ function atacar() {
     var attacked = getCharacterByPosition(players, b);
     console.log(attacked.hp);
 
-    attacker.attack(attacked);
+    attacker.attackCharacter(attacked);
     console.log(attacked.hp);
   }
 }
