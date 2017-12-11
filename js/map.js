@@ -114,75 +114,84 @@ function showMovableTiles(e) {
   var tds = document.querySelectorAll("td");
   var moverange = char.moverange;
   var currpos = parseInt(e.srcElement.parentElement.getAttribute("pos"));
-  console.log(currpos);
+
   /// arriba
-  // for (var index = 1; index <= moverange; index++) {
-  //   var i = currpos - 17 * index;
-  //   try {
-  //     tds[i].className = "move";
-  //   } catch (error) {}
 
-  //   for (let a = 1; a <= moverange - index; a++) {
-  //     let itemid = tds[i + a].id.substr(1);
-  //     if (itemid <= 16) {
-  //       try {
-  //         tds[i + a].className = "move";
-  //       } catch (error) {}
-  //     }
+  for (let index = 0; index <= moverange; index++) {
+    // let itemid = tds[currpos - index].id.substr(1);
+    // var cp = tds[currpos - index * 17].id.charAt(0);
+    // var mp = tds[currpos].id.charAt(0);
+    // if (cp == mp) {
+    try {
+      let toppos = currpos - index * 17;
+      try {
+        tds[toppos].className = "move";
+        for (let i = 0; i <= moverange - index; i++) {
+          try {
+            tds[toppos + i].className = "move";
+          } catch (error) {}
+        }
+      } catch (error) {}
 
-  //     // tds[i + a  + index].className = "notmove";
-  //   }
-  //   for (let a = moverange - index; a >= 1; a--) {
-  //     let itemid = tds[i - a].id.substr(1);
+      try {
+        for (let i = 0; i <= moverange - index; i++) {
+          try {
+            tds[toppos - i].className = "move";
+          } catch (error) {}
+        }
+      } catch (error) {}
+    } catch (error) {}
+    // }
+  }
 
-  //     try {
-  //       tds[i - a].className = "move";
-  //     } catch (error) {}
-  //     //   tds[i + a + 1].className = "notmove";
-  //   }
-  // }
+  /// abajo
 
-  // try {
-  //   tds[currpos - 17 * index].className = "notmove";
-  // } catch (error) {}
-  // abajo
-  // for (var index = 1; index <= moverange; index++) {
-  //   var i = currpos + 17 * index;
-  //   try {
-  //     tds[i].className = "move";
-  //   } catch (error) {}
+  for (let index = 0; index <= moverange; index++) {
+    try {
+      let toppos = currpos + index * 17;
+      try {
+        tds[toppos].className = "move";
+        for (let i = 0; i <= moverange - index; i++) {
+          try {
+            tds[toppos + i].className = "move";
+          } catch (error) {}
+        }
+      } catch (error) {}
 
-  //   for (let a = 1; a <= moverange - index; a++) {
-  //     try {
-  //       tds[i + a].className = "move";
-  //     } catch (error) {}
-  //     //   tds[i + a + 1].className = "notmove";
-  //   }
-  //   for (let a = moverange - index; a >= 1; a--) {
-  //     try {
-  //       tds[i - a].className = "move";
-  //     } catch (error) {}
-  //   }
-  // }
+      try {
+        for (let i = 0; i <= moverange - index; i++) {
+          try {
+            tds[toppos - i].className = "move";
+          } catch (error) {}
+        }
+      } catch (error) {}
+    } catch (error) {}
+
+    // }
+  }
 
   /// derecha
 
   for (let index = 0; index <= moverange; index++) {
     // let itemid = tds[currpos - index].id.substr(1);
-    var cp = tds[currpos + index].id.charAt(0);
-    var mp = tds[currpos].id.charAt(0);
-    if (cp == mp) {
-      tds[currpos + index].className = "move";
-    }
+    try {
+      var cp = tds[currpos + index].id.charAt(0);
+      var mp = tds[currpos].id.charAt(0);
+      if (cp == mp) {
+        tds[currpos + index].className = "move";
+      }
+    } catch (error) {}
   }
 
-  // /// izquierda
+  /// izquierda
 
   for (let index = moverange; index >= 0; index--) {
-    var cp = tds[currpos - index].id.charAt(0);
-    var mp = tds[currpos].id.charAt(0);
-    if (cp == mp) {
-      tds[currpos - index].className = "move";
-    }
+    try {
+      var cp = tds[currpos - index].id.charAt(0);
+      var mp = tds[currpos].id.charAt(0);
+      if (cp == mp) {
+        tds[currpos - index].className = "move";
+      }
+    } catch (error) {}
   }
 }
