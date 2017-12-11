@@ -1,3 +1,8 @@
+@font-face {
+  font-family: menufont;
+  src: url(../resources/fonts/grend.ttf);
+}
+
 .theme-table,
 .map-container {
   margin: 0 auto;
@@ -43,4 +48,92 @@ td {
 .move {
   background-color: green;
   opacity: 0.4;
+}
+
+#bottom-menu {
+  background-image: url("../resources/hud/menus/bottominfo.png");
+  background-repeat: no-repeat;
+  width: 510px;
+  text-align: center;
+  margin: 0 auto;
+  height: 220px;
+  background-position: 10px;
+  font-size: 14px;
+}
+
+#buttons {
+  position: absolute;
+  margin-top: 172px;
+  margin-left: 40px;
+  font-family: "menufont";
+  color: black;
+}
+
+.button-margin {
+  margin-left: 55px;
+  cursor: pointer;
+}
+
+#information {
+  border: 1px solid black;
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 170px;
+  font-family: "menufont";
+  color: black;
+  text-align: left;
+  padding: 10px;
+  width: 130px;
+  height: 100px;
+}
+
+#image {
+  position: absolute;
+  margin-left: 35px;
+  margin-top: 20px;
+  border: 1px solid black;
+  height: 120px;
+  color: black;
+  width: 120px;
+}
+
+#character-name {
+  font-family: "menufont";
+  color: black;
+  text-transform: capitalize;
+  top: 4px;
+  text-decoration: underline;
+  position: relative;
+}
+
+#character-face {
+  margin-top: 10px;
+}
+#game-info {
+  border: 1px solid black;
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 335px;
+  font-family: "menufont";
+  color: black;
+  text-align: left;
+  padding: 10px;
+  width: 122px;
+  height: 100px;
+}
+
+.info-header {
+  text-decoration: underline;
+}
+
+#info-game {
+  margin-left: 40px;
+  position: absolute;
+  top: 3px;
+}
+
+#info-char {
+  margin-left: 11px;
+  position: absolute;
+  top: 3px;
 }

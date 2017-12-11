@@ -1,4 +1,5 @@
-const resourcespath = "../resources/characters/map/";
+const mappath = "../resources/characters/map/";
+const facepath = "../resources/hud/faces/";
 const characters = [
   {
     name: "archer",
@@ -8,7 +9,8 @@ const characters = [
     crit: 5,
     moverange: 2,
     attackrange: 3,
-    source: resourcespath + "archer.png"
+    source: mappath + "archer.png",
+    face: facepath + "archer.png"
   },
   {
     name: "assasin",
@@ -18,7 +20,8 @@ const characters = [
     crit: 40,
     moverange: 2,
     attackrange: 1,
-    source: resourcespath + "assasin.png"
+    source: mappath + "assasin.png",
+    face: facepath + "assasin.png"
   },
   {
     name: "cavalier",
@@ -28,7 +31,8 @@ const characters = [
     crit: 10,
     moverange: 4,
     attackrange: 1,
-    source: resourcespath + "cavalier.png"
+    source: mappath + "cavalier.png",
+    face: facepath + "cavalier.png"
   },
   {
     name: "knight",
@@ -38,7 +42,8 @@ const characters = [
     crit: 15,
     moverange: 2,
     attackrange: 1,
-    source: resourcespath + "knight.png"
+    source: mappath + "knight.png",
+    face: facepath + "knight.png"
   },
   {
     name: "mercenary",
@@ -48,7 +53,8 @@ const characters = [
     crit: 0,
     moverange: 2,
     attackrange: 1,
-    source: resourcespath + "mercenary.png"
+    source: mappath + "mercenary.png",
+    face: facepath + "mercenary.png"
   },
   {
     name: "pirate",
@@ -58,7 +64,8 @@ const characters = [
     crit: 80,
     moverange: 2,
     attackrange: 1,
-    source: resourcespath + "pirate.png"
+    source: mappath + "pirate.png",
+    face: facepath + "pirate.png"
   },
   {
     name: "sniper",
@@ -68,7 +75,8 @@ const characters = [
     crit: 10,
     moverange: 2,
     attackrange: 4,
-    source: resourcespath + "sniper.png"
+    source: mappath + "sniper.png",
+    face: facepath + "sniper.png"
   }
 ];
 
@@ -83,6 +91,7 @@ class character {
     this.moverange = item.moverange;
     this.attackrange = item.attackrange;
     this.source = item.source;
+    this.face = item.face;
     this.position = pos;
   }
   move(pos) {

@@ -13,6 +13,9 @@ function generateMap() {
       td.id = id;
       td.setAttribute("pos", numbertd);
       td.setAttribute("title", id);
+      td.addEventListener("click", clearInformationMenu, false);
+      td.addEventListener("mouseover", showCurrentGameInformation, false);
+
       numbertd++;
       tr.appendChild(td);
     }
@@ -30,7 +33,22 @@ function renderCharacters(players) {
   players.forEach(player => {
     player.characters.forEach(element => {
       let td = document.getElementById(element.position);
-      let source_img = (td.innerHTML = "<img src='" + element.source + "'/>");
+      // let source_img = (td.innerHTML = "<img src='" + element.source + "'/>");
+
+      let img = document.createElement("img");
+      img.src = element.source;
+      img.id = element.position;
+
+      img.setAttribute("player", player.name);
+      img.setAttribute("name", element.name);
+      img.setAttribute("hp", element.hp);
+      img.setAttribute("attack", element.armor);
+      img.setAttribute("armor", element.armor);
+      img.setAttribute("crit", element.crit);
+
+      img.addEventListener("click", showInformationInMenu, false);
+
+      td.appendChild(img);
 
       td.setAttribute("player", player.name);
       td.setAttribute("name", element.name);
@@ -38,6 +56,7 @@ function renderCharacters(players) {
       td.setAttribute("attack", element.armor);
       td.setAttribute("armor", element.armor);
       td.setAttribute("crit", element.crit);
+      td.addEventListener("click", showInformationInMenu, false);
     });
   });
 }

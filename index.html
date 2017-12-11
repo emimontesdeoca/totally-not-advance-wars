@@ -17,9 +17,49 @@
 
 
     <br>
-    <div style="width: 100%; text-align: center">
-        <button onclick="mover()">Mover</button>
-        <button onclick="atacar()">Atacar</button>
+    <div id="bottom-menu">
+        <div id="image">
+            <span id="character-name"></span>
+            <br>
+
+            <img id="character-face" src="" alt="">
+
+        </div>
+        <div id="information">
+
+            <span id="info-char" style="display: none"></span>
+            <span class="info-header" id="info-char">Information</span>
+            <br>
+
+            <span id="character-hp"></span>
+            <br>
+            <span id="character-attack"></span>
+            <br>
+            <span id="character-armor"></span>
+            <br>
+            <span id="character-crit"></span>
+            <br>
+
+
+
+        </div>
+        <div id="game-info">
+            <span class="info-header" id="info-game">Game</span>
+            <br> Turn:
+            <span id="info-turn"></span>
+            <br> P1's allies:
+            <span id="player1-char"></span>
+            <br> P2's allies:
+            <span id="player2-char"></span>
+            <br> Position:
+            <span id="current-pos"></span>
+            <br>
+        </div>
+        <div id="buttons">
+            <span class="button-margin" onclick="mover()">Mover</span>
+            <span class="button-margin" onclick="atacar()">Atacar</span>
+            <span class="button-margin">Terminar</span>
+        </div>
     </div>
 
 
@@ -27,6 +67,8 @@
     <script src="js/character.js"></script>
     <script src="js/player.js"></script>
     <script src="js/map.js"></script>
+    <script src="js/hud.js"></script>
+
     <script src="js/app.js"></script>
 
 </body>
