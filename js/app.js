@@ -13,23 +13,6 @@ players.push(player2);
 
 renderCharacters(players);
 
-function mover() {
-  let charid = document.getElementById("info-char");
-  if (charid.getAttribute("char") == null) {
-    alert("Seleccione un personaje!");
-  } else {
-    var b = prompt("dime a donde lo quieres mover");
-
-    var char = getCharacterByPosition(players, charid.getAttribute("char"));
-    console.log(char);
-    deleteCharactersOnMap();
-
-    char.move(b);
-    console.log(char);
-    renderCharacters(players);
-  }
-}
-
 function atacar() {
   let charid = document.getElementById("info-char");
   if (charid.getAttribute("char") == null) {

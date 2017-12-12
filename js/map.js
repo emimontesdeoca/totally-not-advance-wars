@@ -16,6 +16,7 @@ function generateMap() {
       td.addEventListener("click", clearInformationMenu, false);
       td.addEventListener("click", deleteClassesTd, false);
       td.addEventListener("mouseover", showCurrentGameInformation, false);
+      td.addEventListener("click", disableButtons, false);
 
       numbertd++;
       tr.appendChild(td);
@@ -46,9 +47,10 @@ function renderCharacters(players) {
       img.setAttribute("attack", element.armor);
       img.setAttribute("armor", element.armor);
       img.setAttribute("crit", element.crit);
+      img.setAttribute("finished", element.turnfinished);
 
       img.addEventListener("click", showInformationInMenu, false);
-      img.addEventListener("click", showMovableTiles, false);
+      // img.addEventListener("click", showMovableTiles, false);
 
       td.appendChild(img);
 
@@ -58,8 +60,15 @@ function renderCharacters(players) {
       td.setAttribute("attack", element.armor);
       td.setAttribute("armor", element.armor);
       td.setAttribute("crit", element.crit);
+      td.setAttribute("finished", element.turnfinished);
+
       td.addEventListener("click", showInformationInMenu, false);
-      td.addEventListener("click", showMovableTiles, false);
+      // td.addEventListener("click", showMovableTiles, false);
+
+      if (element.turnfinished) {
+        img.className = "disabled";
+        td.className = "disabled";
+      }
     });
   });
 }
@@ -89,7 +98,11 @@ function deleteClassesTd() {
 
   for (let index = 0; index < tds.length; index++) {
     const element = tds[index];
-    element.className = "";
+    if (element.getAttribute("finished") == "true") {
+      element.className = "disabled";
+    } else {
+      element.className = "";
+    }
   }
 }
 
@@ -110,13 +123,14 @@ function getCharacterByPosition(players, pos) {
 }
 
 function showMovableTiles(e) {
-  var char = getCharacterByPosition(players, e.srcElement.id);
+  var char = getCharacterByPosition(players, e.id);
   var tds = document.querySelectorAll("td");
   var moverange = char.moverange;
-  var currpos = parseInt(e.srcElement.parentElement.getAttribute("pos"));
+  var currpos = parseInt(e.getAttribute("pos"));
+
+  SetNotMovableTd();
 
   /// arriba
-
   for (let index = 0; index <= moverange; index++) {
     // let itemid = tds[currpos - index].id.substr(1);
     // var cp = tds[currpos - index * 17].id.charAt(0);
@@ -126,9 +140,13 @@ function showMovableTiles(e) {
       let toppos = currpos - index * 17;
       try {
         tds[toppos].className = "move";
+        tds[toppos].setAttribute("movable", "false");
+
         for (let i = 0; i <= moverange - index; i++) {
           try {
             tds[toppos + i].className = "move";
+            tds[toppos + i].setAttribute("movable", "true");
+            tds[toppos + i].addEventListener("click", moveCharacter, false);
           } catch (error) {}
         }
       } catch (error) {}
@@ -137,6 +155,8 @@ function showMovableTiles(e) {
         for (let i = 0; i <= moverange - index; i++) {
           try {
             tds[toppos - i].className = "move";
+            tds[toppos - i].setAttribute("movable", "true");
+            tds[toppos - i].addEventListener("click", moveCharacter, false);
           } catch (error) {}
         }
       } catch (error) {}
@@ -151,9 +171,13 @@ function showMovableTiles(e) {
       let toppos = currpos + index * 17;
       try {
         tds[toppos].className = "move";
+        tds[toppos].setAttribute("movable", "true");
+
         for (let i = 0; i <= moverange - index; i++) {
           try {
             tds[toppos + i].className = "move";
+            tds[toppos + i].setAttribute("movable", "true");
+            tds[toppos + i].addEventListener("click", moveCharacter, false);
           } catch (error) {}
         }
       } catch (error) {}
@@ -162,6 +186,8 @@ function showMovableTiles(e) {
         for (let i = 0; i <= moverange - index; i++) {
           try {
             tds[toppos - i].className = "move";
+            tds[toppos - i].setAttribute("movable", "true");
+            tds[toppos - i].addEventListener("click", moveCharacter, false);
           } catch (error) {}
         }
       } catch (error) {}
@@ -179,6 +205,8 @@ function showMovableTiles(e) {
       var mp = tds[currpos].id.charAt(0);
       if (cp == mp) {
         tds[currpos + index].className = "move";
+        tds[currpos + index].setAttribute("movable", "true");
+        tds[currpos + index].addEventListener("click", moveCharacter, false);
       }
     } catch (error) {}
   }
@@ -191,7 +219,47 @@ function showMovableTiles(e) {
       var mp = tds[currpos].id.charAt(0);
       if (cp == mp) {
         tds[currpos - index].className = "move";
+        tds[currpos - index].setAttribute("movable", "true");
+        tds[currpos - index].addEventListener("click", moveCharacter, false);
       }
     } catch (error) {}
   }
+
+  tds[currpos].setAttribute("movable", "false");
+  tds[currpos].removeEventListener("click", moveCharacter, false);
+}
+
+function SetNotMovableTd() {
+  var tds = document.getElementsByTagName("td");
+
+  for (let index = 0; index < tds.length; index++) {
+    const element = tds[index];
+    if (element.getAttribute("movable") == "true") {
+      element.removeEventListener("click", moveCharacter, false);
+      element.setAttribute("movable", "false");
+    } else {
+      element.setAttribute("movable", "false");
+    }
+  }
+}
+
+function moveCharacter(td) {
+  let charid = document.getElementById("info-char");
+  var char = getCharacterByPosition(players, charid.getAttribute("char"));
+
+  var nextMove = td.srcElement.id;
+  char.move(nextMove);
+
+  SetNotMovableTd();
+
+  disableCharacterAfterMoverOrAttack(nextMove);
+  deleteCharactersOnMap();
+  renderCharacters(players);
+}
+
+function disableCharacterAfterMoverOrAttack(pos) {
+  let charid = document.getElementById("info-char");
+
+  let charelement = document.getElementById(pos);
+  charelement.className = "disabled";
 }

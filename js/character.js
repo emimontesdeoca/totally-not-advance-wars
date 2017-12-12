@@ -93,12 +93,15 @@ class character {
     this.source = item.source;
     this.face = item.face;
     this.position = pos;
+    this.turnfinished = false;
   }
   move(pos) {
     this.position = pos;
+    this.turnfinished = true;
   }
   attackCharacter(character) {
     character.hp -= this.attack;
+    this.turnfinished = true;
   }
 }
 

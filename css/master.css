@@ -14,7 +14,7 @@
   border-collapse: collapse;
 }
 .map-container {
-  background-image: url("../resources/maps/ice.png");
+  background-image: url("../resources/maps/desert.png");
   background-repeat: no-repeat;
   width: 510px;
   text-align: center;
@@ -141,4 +141,9 @@ td:hover {
   margin-left: 11px;
   position: absolute;
   top: 3px;
+}
+
+.disabled {
+  background-color: black;
+  opacity: 0.5;
 }

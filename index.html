@@ -47,9 +47,9 @@
             <br>
         </div>
         <div id="buttons">
-            <span class="button-margin" onclick="mover()">Mover</span>
-            <span class="button-margin" onclick="atacar()">Atacar</span>
-            <span class="button-margin">Terminar</span>
+            <button class="button-margin" id="btn-mover" onclick="showMovableTilesOfLoadedCharacter()" disabled>Mover</button>
+            <button class="button-margin" id="btn-atacar" disabled>Atacar</button>
+            <button class="button-margin" id="btn-terminar" onclick="finishTurno()">Terminar</button>
         </div>
     </div>
 

@@ -22,6 +22,16 @@ function showInformationInMenu(e) {
   charattack.innerHTML = "Attack: " + charinformation.attack;
   chararmor.innerHTML = "Armor: " + charinformation.armor;
   charcrit.innerHTML = "Critical: " + charinformation.crit + "%";
+
+  let charelement = document.getElementById(charid.getAttribute("char"));
+
+  if (charelement.getAttribute("finished") == "false") {
+    let btnmover = document.getElementById("btn-mover");
+    let btnatacar = document.getElementById("btn-atacar");
+
+    btnmover.disabled = false;
+    btnatacar.disabled = false;
+  }
 }
 
 function clearInformationMenu() {
@@ -34,7 +44,7 @@ function clearInformationMenu() {
   let chararmor = document.getElementById("character-armor");
   let charcrit = document.getElementById("character-crit");
 
-  charid.removeAttribute("char");
+  // charid.removeAttribute("char");
   charimage.src = "";
   charname.innerHTML = "";
   charhp.innerHTML = "";
@@ -52,4 +62,34 @@ function showCurrentGameInformation(e) {
   player1pj.innerText = players[0].characters.length;
   player2pj.innerText = players[1].characters.length;
   currposition.innerText = e.srcElement.id;
+}
+
+function showMovableTilesOfLoadedCharacter() {
+  let charid = document.getElementById("info-char");
+
+  let id = charid.getAttribute("char");
+  let elementChar = document.getElementById(id);
+  showMovableTiles(elementChar);
+}
+
+function disableButtons() {
+  let btnmover = document.getElementById("btn-mover");
+  let btnatacar = document.getElementById("btn-atacar");
+  let btnatacar = document.getElementById("btn-atacar");
+
+  btnmover.disabled = true;
+  btnatacar.disabled = true;
+}
+
+function finishTurno() {
+  let charid = document.getElementById("info-char");
+
+  let id = charid.getAttribute("char");
+  let elementChar = document.getElementById(id);
+
+  let charinformation = getCharacterByPosition(players, elementChar.id);
+
+  charinformation.finishTurno = true;
+  deleteCharactersOnMap();
+  renderCharacters(players);
 }
