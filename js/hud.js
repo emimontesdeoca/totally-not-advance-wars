@@ -35,6 +35,9 @@ function showInformationInMenu(e) {
 }
 
 function clearInformationMenu() {
+  if (document.querySelectorAll("td.move").length == 0) {
+    SetNotMovableTd();
+  }
   let charid = document.getElementById("info-char");
 
   let charimage = document.getElementById("character-face");
@@ -75,7 +78,7 @@ function showMovableTilesOfLoadedCharacter() {
 function disableButtons() {
   let btnmover = document.getElementById("btn-mover");
   let btnatacar = document.getElementById("btn-atacar");
-  let btnatacar = document.getElementById("btn-atacar");
+  // let btnatacar = document.getElementById("btn-atacar");
 
   btnmover.disabled = true;
   btnatacar.disabled = true;
