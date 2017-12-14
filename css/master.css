@@ -2,6 +2,9 @@
   font-family: menufont;
   src: url(../resources/fonts/grend.ttf);
 }
+* {
+  box-sizing: border-box;
+}
 
 .theme-table,
 .map-container {
@@ -14,9 +17,9 @@
   border-collapse: collapse;
 }
 .map-container {
-  background-image: url("../resources/maps/desert.png");
+  background-image: url("../resources/maps/aw.png");
   background-repeat: no-repeat;
-  width: 510px;
+  width: 480px;
   text-align: center;
   /* float: left; */
 }
@@ -28,8 +31,8 @@ body {
 }
 
 td {
-  width: 27px;
-  height: 27px;
+  width: 19px;
+  height: 20px;
   border: 1px solid black;
 }
 
@@ -51,8 +54,72 @@ td:hover {
   opacity: 0.4;
 }
 .move {
-  background-color: green;
-  opacity: 0.4;
+  /* background-color: green; */
+  opacity: 0.6;
+  background-image: url("../resources/maps/hud/movable.png");
+}
+
+#char-infomartion {
+  position: absolute;
+  background-image: url("../resources/maps/hud/team1-header.png");
+  background-repeat: no-repeat;
+  width: 101px;
+  height: 70px;
+  font-family: "menufont";
+  font-size: 16px;
+  padding-left: 10px;
+  padding-top: 10px;
+  left: 1090px;
+  top: 75px;
+  display: none;
+  text-align: left;
+  z-index: 9999 !important;
+}
+
+.img-hud {
+  margin-right: 1px;
+  margin-bottom: 2px;
+}
+
+.img-hud-hp {
+  position: absolute;
+  margin-top: 2px;
+  margin-left: 1px;
+}
+.img-hud-ad {
+  position: absolute;
+  margin-top: 2px;
+  margin-left: 1px;
+}
+.img-hud-ar {
+  position: absolute;
+  margin-top: 2px;
+  margin-left: 3px;
+}
+
+#char-menu {
+  position: absolute;
+  background-image: url(../resources/maps/hud/menu2.png);
+  background-repeat: no-repeat;
+  /* width: 101px; */
+  height: 77px;
+  font-family: "menufont";
+  font-size: 15px;
+  /* padding-left: 4px; */
+  padding-top: 3px;
+  left: 810px;
+  top: 110px;
+  z-index: 9999 !important;
+  display: none;
+}
+
+.hud-buttons {
+  text-align: left;
+  font-size: 20px;
+  background: none;
+  border: none;
+  font-family: "menufont";
+  padding-left: 4px;
 }
 
 #bottom-menu {

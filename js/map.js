@@ -4,10 +4,10 @@ function generateMap() {
   let table = document.createElement("table");
   table.className = "theme-table";
   var numbertd = 0;
-  for (let index = 0; index < 17; index++) {
+  for (let index = 0; index < 14; index++) {
     let tr = document.createElement("tr");
 
-    for (let i = 0; i < 17; i++) {
+    for (let i = 0; i < 26; i++) {
       let td = document.createElement("td");
       let id = getLetterByIndex(index) + i;
       td.id = id;
@@ -15,7 +15,7 @@ function generateMap() {
       td.setAttribute("title", id);
       td.addEventListener("click", clearInformationMenu, false);
       td.addEventListener("click", deleteClassesTd, false);
-      td.addEventListener("mouseover", showCurrentGameInformation, false);
+      // td.addEventListener("mouseover", showCurrentGameInformation, false);
       td.addEventListener("click", disableButtons, false);
 
       numbertd++;
@@ -123,13 +123,15 @@ function getCharacterByPosition(players, pos) {
 }
 
 function showMovableTiles(e) {
-  var char = getCharacterByPosition(players, e.id);
+  let a = document.getElementById("info-char").getAttribute("char");
+  var char = getCharacterByPosition(players, a);
   var tds = document.querySelectorAll("td");
   var moverange = char.moverange;
   var currpos = parseInt(e.getAttribute("pos"));
 
   SetNotMovableTd();
 
+  /*
   /// arriba
   for (let index = 0; index <= moverange; index++) {
     // let itemid = tds[currpos - index].id.substr(1);
@@ -163,7 +165,7 @@ function showMovableTiles(e) {
     } catch (error) {}
     // }
   }
-
+  
   /// abajo
 
   for (let index = 0; index <= moverange; index++) {
@@ -195,7 +197,7 @@ function showMovableTiles(e) {
 
     // }
   }
-
+*/
   /// derecha
 
   for (let index = 0; index <= moverange; index++) {
@@ -227,6 +229,9 @@ function showMovableTiles(e) {
 
   tds[currpos].setAttribute("movable", "false");
   tds[currpos].removeEventListener("click", moveCharacter, false);
+
+  let charmenu = document.getElementById("char-menu");
+  charmenu.style.display = "none";
 }
 
 function SetNotMovableTd() {
@@ -242,6 +247,7 @@ function SetNotMovableTd() {
     }
   }
 }
+
 
 function moveCharacter(td) {
   let charid = document.getElementById("info-char");
