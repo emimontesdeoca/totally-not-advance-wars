@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+#map {
+  position: relative;
+}
+
 .theme-table,
 .map-container {
   margin: 0 auto;
@@ -61,7 +65,7 @@ td:hover {
 
 #char-infomartion {
   position: absolute;
-  background-image: url("../resources/maps/hud/team1-header.png");
+  /* background-image: url("../resources/maps/hud/team1-header.png"); */
   background-repeat: no-repeat;
   width: 101px;
   height: 70px;
@@ -69,11 +73,20 @@ td:hover {
   font-size: 16px;
   padding-left: 10px;
   padding-top: 10px;
-  left: 1090px;
-  top: 75px;
+  left: 360px;
+  top: 20px;
   display: none;
   text-align: left;
   z-index: 9999 !important;
+}
+
+.charinfo-team1 {
+  background-image: url("../resources/maps/hud/team1-header.png");
+  background-repeat: no-repeat;
+}
+.charinfo-team2 {
+  background-image: url("../resources/maps/hud/team2-header.png");
+  background-repeat: no-repeat;
 }
 
 .img-hud {

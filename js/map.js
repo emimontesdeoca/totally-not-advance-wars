@@ -206,9 +206,14 @@ function showMovableTiles(e) {
       var cp = tds[currpos + index].id.charAt(0);
       var mp = tds[currpos].id.charAt(0);
       if (cp == mp) {
-        tds[currpos + index].className = "move";
-        tds[currpos + index].setAttribute("movable", "true");
-        tds[currpos + index].addEventListener("click", moveCharacter, false);
+        if (tds[currpos + index].getAttribute("player") != null) {
+          tds[currpos + index].className = "notmove";
+          tds[currpos + index].setAttribute("movable", "false");
+        } else {
+          tds[currpos + index].className = "move";
+          tds[currpos + index].setAttribute("movable", "true");
+          tds[currpos + index].addEventListener("click", moveCharacter, false);
+        }
       }
     } catch (error) {}
   }
@@ -220,9 +225,14 @@ function showMovableTiles(e) {
       var cp = tds[currpos - index].id.charAt(0);
       var mp = tds[currpos].id.charAt(0);
       if (cp == mp) {
-        tds[currpos - index].className = "move";
-        tds[currpos - index].setAttribute("movable", "true");
-        tds[currpos - index].addEventListener("click", moveCharacter, false);
+        if (tds[currpos - index].getAttribute("player") != null) {
+          tds[currpos - index].className = "notmove";
+          tds[currpos - index].setAttribute("movable", "false");
+        } else {
+          tds[currpos - index].className = "move";
+          tds[currpos - index].setAttribute("movable", "true");
+          tds[currpos - index].addEventListener("click", moveCharacter, false);
+        }
       }
     } catch (error) {}
   }
@@ -248,7 +258,6 @@ function SetNotMovableTd() {
   }
 }
 
-
 function moveCharacter(td) {
   let charid = document.getElementById("info-char");
   var char = getCharacterByPosition(players, charid.getAttribute("char"));
@@ -259,6 +268,20 @@ function moveCharacter(td) {
   SetNotMovableTd();
 
   disableCharacterAfterMoverOrAttack(nextMove);
+  deleteCharactersOnMap();
+  renderCharacters(players);
+}
+
+function finishTurn(td) {
+  let charid = document.getElementById("info-char");
+  var char = getCharacterByPosition(players, charid.getAttribute("char"));
+
+  char.finishTurn();
+
+  let charmenu = document.getElementById("char-menu");
+  charmenu.style.display = "none";
+
+  SetNotMovableTd();
   deleteCharactersOnMap();
   renderCharacters(players);
 }

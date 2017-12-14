@@ -24,17 +24,17 @@
             <span<span class="img-hud-ar" id="char-information-ar">60 ARMOR</span>
         </div>
 
-        <div id="char-menu">
-            <button class="hud-buttons" id="btn-mover" onclick="showMovableTilesOfLoadedCharacter()" disabled>MOVE</button>
-            <br>
-            <button class="hud-buttons" id="btn-atacar">ATTACK</button>
-            <br>
-            <button class="hud-buttons" id="btn-terminar">END</button>
-            <span id="info-char" style="display: none"></span>
-        </div>
+
     </div>
 
-
+    <div id="char-menu">
+        <button class="hud-buttons" id="btn-mover" onclick="showMovableTilesOfLoadedCharacter()">MOVE</button>
+        <br>
+        <button class="hud-buttons" id="btn-atacar">ATTACK</button>
+        <br>
+        <button class="hud-buttons" id="btn-terminar" onclick="finishTurn()">END</button>
+        <span id="info-char" style="display: none"></span>
+    </div>
     <!-- <img src="resources/maps/hud/team2-header.png" alt="">
 <img src="resources/maps/hud/team1-header.png" alt="">
 <img src="resources/maps/hud/movable.png" alt="">

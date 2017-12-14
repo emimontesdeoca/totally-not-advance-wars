@@ -18,17 +18,6 @@ function showInformationInMenu(e) {
   let hudcontainer = document.getElementById("char-infomartion");
   hudcontainer.style.display = "inline";
 
-  // var offsetelement = document.getElementById("B20");
-  // console.log(offsetelement);
-  // var eleX = offsetelement.offsetLeft + offsetelement.scrollLeft;
-  // var eleY = offsetelement.offsetTop + offsetelement.scrollTop;
-  // console.log(eleX + "," + eleY);
-
-  // hudcontainer.style.left = eleX + 150 + "px";
-  // hudcontainer.style.top = eleY + 50 + "px";
-
-  // console.log(hudcontainer.style.left + "," + hudcontainer.style.top);
-
   let charmenu = document.getElementById("char-menu");
 
   var left = e.clientX + 5 + "px";
@@ -37,6 +26,16 @@ function showInformationInMenu(e) {
   charmenu.style.display = "inline";
   charmenu.style.left = left;
   charmenu.style.top = top;
+
+  let team = e.srcElement.src;
+
+  if (team.indexOf("team1") == -1) {
+    console.log("no contiene");
+    hudcontainer.className = "charinfo-team2";
+  } else {
+    hudcontainer.className = "charinfo-team1";
+    console.log("contiene");
+  }
 
   let btnmover = document.getElementById("btn-mover");
   let btnatacar = document.getElementById("btn-atacar");

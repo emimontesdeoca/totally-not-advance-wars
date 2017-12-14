@@ -96,6 +96,9 @@ class character {
     character.hp -= this.attack;
     this.turnfinished = true;
   }
+  finishTurn() {
+    this.turnfinished = true;
+  }
 }
 
 function getHpCharacter(name) {
