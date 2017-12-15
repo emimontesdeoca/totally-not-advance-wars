@@ -33,6 +33,8 @@ body {
   width: 480px;
   text-align: center;
   /* float: left; */
+  min-height: 290px;
+  max-height: 290px;
 }
 
 td {
