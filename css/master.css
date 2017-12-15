@@ -1,9 +1,15 @@
 @font-face {
   font-family: menufont;
-  src: url(../resources/fonts/grend.ttf);
+  src: url(../resources/fonts/font.ttf);
 }
 * {
   box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 #map {
@@ -13,6 +19,7 @@
 .theme-table,
 .map-container {
   margin: 0 auto;
+  cursor: url(../resources/hud/menus/mouse.png), auto;
 }
 
 .theme-table {
@@ -28,21 +35,18 @@
   /* float: left; */
 }
 
-body {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
 td {
   width: 19px;
   height: 20px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 td:hover {
   background-color: white;
-  opacity: 0.5;
+  opacity: 0.7;
+  background-repeat: no-repeat;
+  width: 19px;
+  height: 20px;
 }
 
 .character {
@@ -50,8 +54,9 @@ td:hover {
 }
 
 .notmove {
-  background-color: red;
-  opacity: 0.4;
+  opacity: 0.7;
+  background-image: url("../resources/hud/menus/notmovable.png");
+  /* background-color: red; */
 }
 .attack {
   background-color: blue;
@@ -59,18 +64,18 @@ td:hover {
 }
 .move {
   /* background-color: green; */
-  opacity: 0.6;
-  background-image: url("../resources/maps/hud/movable.png");
+  opacity: 0.7;
+  background-image: url("../resources/hud/menus/movable.png");
 }
 
 #char-infomartion {
   position: absolute;
-  /* background-image: url("../resources/maps/hud/team1-header.png"); */
+  background-image: url("../resources/hud/menus/team1-header.png");
   background-repeat: no-repeat;
   width: 101px;
   height: 70px;
   font-family: "menufont";
-  font-size: 16px;
+  font-size: 17px;
   padding-left: 10px;
   padding-top: 10px;
   left: 360px;
@@ -81,11 +86,11 @@ td:hover {
 }
 
 .charinfo-team1 {
-  background-image: url("../resources/maps/hud/team1-header.png");
+  background-image: url("../resources/hud/menus/team1-header.png") !important;
   background-repeat: no-repeat;
 }
 .charinfo-team2 {
-  background-image: url("../resources/maps/hud/team2-header.png");
+  background-image: url("../resources/hud/menus/team2-header.png") !important;
   background-repeat: no-repeat;
 }
 
@@ -96,12 +101,12 @@ td:hover {
 
 .img-hud-hp {
   position: absolute;
-  margin-top: 2px;
+  margin-top: 1px;
   margin-left: 1px;
 }
 .img-hud-ad {
   position: absolute;
-  margin-top: 2px;
+  margin-top: 1px;
   margin-left: 1px;
 }
 .img-hud-ar {
@@ -112,7 +117,7 @@ td:hover {
 
 #char-menu {
   position: absolute;
-  background-image: url(../resources/maps/hud/menu2.png);
+  background-image: url(../resources/hud/menus/menu.png);
   background-repeat: no-repeat;
   /* width: 101px; */
   height: 77px;
@@ -124,6 +129,7 @@ td:hover {
   top: 110px;
   z-index: 9999 !important;
   display: none;
+  cursor: url(../resources/hud/menus/mouse.png), auto;
 }
 
 .hud-buttons {
@@ -133,88 +139,15 @@ td:hover {
   border: none;
   font-family: "menufont";
   padding-left: 4px;
+  cursor: url(../resources/hud/menus/mouse.png), auto;
 }
-
-#bottom-menu {
-  background-image: url("../resources/hud/menus/bottominfo.png");
-  background-repeat: no-repeat;
-  width: 510px;
-  text-align: center;
-  margin: 0 auto;
-  height: 220px;
-  background-position: 10px;
-  font-size: 14px;
-}
-
-#buttons {
-  position: absolute;
-  margin-top: 172px;
-  margin-left: 40px;
-  font-family: "menufont";
-  color: black;
+.hud-buttons:hover {
+  color: red;
 }
 
 .button-margin {
   margin-left: 55px;
   cursor: pointer;
-}
-
-#information {
-  border: 1px solid black;
-  position: absolute;
-  margin-top: 20px;
-  margin-left: 170px;
-  font-family: "menufont";
-  color: black;
-  text-align: left;
-  padding: 10px;
-  width: 130px;
-  height: 100px;
-}
-
-#image {
-  position: absolute;
-  margin-left: 35px;
-  margin-top: 20px;
-  border: 1px solid black;
-  height: 120px;
-  color: black;
-  width: 120px;
-}
-
-#character-name {
-  font-family: "menufont";
-  color: black;
-  text-transform: capitalize;
-  top: 4px;
-  text-decoration: underline;
-  position: relative;
-}
-
-#character-face {
-  margin-top: 10px;
-}
-#game-info {
-  border: 1px solid black;
-  position: absolute;
-  margin-top: 20px;
-  margin-left: 335px;
-  font-family: "menufont";
-  color: black;
-  text-align: left;
-  padding: 10px;
-  width: 122px;
-  height: 100px;
-}
-
-.info-header {
-  text-decoration: underline;
-}
-
-#info-game {
-  margin-left: 40px;
-  position: absolute;
-  top: 3px;
 }
 
 #info-char {

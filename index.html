@@ -14,70 +14,25 @@
 
     <div id="map" class="map-container">
         <div id="char-infomartion">
-            <img src="resources/maps/hud/hp.png" alt="" class="img-hud ">
+            <img src="resources/hud/menus/hp.png" alt="" class="img-hud ">
             <span class="img-hud-hp" id="char-information-id">150 HEALTH</span>
             <br>
-            <img src="resources/maps/hud/ad.png" alt="" class="img-hud ">
+            <img src="resources/hud/menus/ad.png" alt="" class="img-hud ">
             <span class="img-hud-ad" id="char-information-ad">80 DAMAGE</span>
             <br>
-            <img src="resources/maps/hud/ar.png" alt="" class="img-hud">
+            <img src="resources/hud/menus/ar.png" alt="" class="img-hud">
             <span<span class="img-hud-ar" id="char-information-ar">60 ARMOR</span>
         </div>
-
-
     </div>
 
     <div id="char-menu">
-        <button class="hud-buttons" id="btn-mover" onclick="showMovableTilesOfLoadedCharacter()">MOVE</button>
+        <button class="hud-buttons" id="btn-mover" disabled onclick="showMovableTilesOfLoadedCharacter()">MOVE</button>
         <br>
-        <button class="hud-buttons" id="btn-atacar">ATTACK</button>
+        <button class="hud-buttons" id="btn-atacar" disabled>ATTACK</button>
         <br>
-        <button class="hud-buttons" id="btn-terminar" onclick="finishTurn()">END</button>
+        <button class="hud-buttons" id="btn-terminar" onclick="finishTurn()" disabled>END</button>
         <span id="info-char" style="display: none"></span>
     </div>
-    <!-- <img src="resources/maps/hud/team2-header.png" alt="">
-<img src="resources/maps/hud/team1-header.png" alt="">
-<img src="resources/maps/hud/movable.png" alt="">
-<img src="resources/maps/hud/menu.png" alt=""> -->
-
-    <!-- <br>
-    <div id="bottom-menu">
-        <div id="image">
-            <span id="character-name"></span>
-            <br>
-            <img id="character-face" src="" alt="">
-        </div>
-        <div id="information">
-            <span id="info-char" style="display: none"></span>
-            <span class="info-header" id="info-char">Information</span>
-            <br>
-            <span id="character-hp"></span>
-            <br>
-            <span id="character-attack"></span>
-            <br>
-            <span id="character-armor"></span>
-            <br>
-            <span id="character-crit"></span>
-            <br>
-        </div>
-        <div id="game-info">
-            <span class="info-header" id="info-game">Game</span>
-            <br> Turn:
-            <span id="info-turn"></span>
-            <br> P1's allies:
-            <span id="player1-char"></span>
-            <br> P2's allies:
-            <span id="player2-char"></span>
-            <br> Position:
-            <span id="current-pos"></span>
-            <br>
-        </div>
-        <div id="buttons">
-            <button class="button-margin" id="btn-mover" >Mover</button>
-            <button class="button-margin" id="btn-atacar" disabled>Atacar</button>
-            <button class="button-margin" id="btn-terminar" onclick="finishTurno()">Terminar</button>
-        </div>
-    </div> -->
 
 
 

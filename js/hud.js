@@ -27,20 +27,17 @@ function showInformationInMenu(e) {
   charmenu.style.left = left;
   charmenu.style.top = top;
 
-  let team = e.srcElement.src;
-
-  if (team.indexOf("team1") == -1) {
-    console.log("no contiene");
-    hudcontainer.className = "charinfo-team2";
-  } else {
-    hudcontainer.className = "charinfo-team1";
-    console.log("contiene");
-  }
+  try {
+    e.srcElement.src.indexOf("team1") == -1
+      ? (hudcontainer.className = "charinfo-team2")
+      : (hudcontainer.className = "charinfo-team1");
+  } catch (error) {}
 
   let btnmover = document.getElementById("btn-mover");
   let btnatacar = document.getElementById("btn-atacar");
   let btnterminar = document.getElementById("btn-terminar");
 
+  console.log(document.getElementById(e.srcElement.id));
   if (
     document.getElementById(e.srcElement.id).getAttribute("finished") == "false"
   ) {
@@ -55,9 +52,8 @@ function showInformationInMenu(e) {
 }
 
 function clearInformationMenu() {
-  if (document.querySelectorAll("td.move").length == 0) {
-    SetNotMovableTd();
-  }
+  document.querySelectorAll("td.move").length == 0 ? SetNotMovableTd() : null;
+
   let charid = document.getElementById("info-char");
 
   let charhp = document.getElementById("char-information-id");

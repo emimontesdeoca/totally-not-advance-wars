@@ -1,9 +1,13 @@
 function generateMap() {
   let container = document.getElementById("map");
 
+  let mapn = Math.floor(Math.random() * 3);
+  let string = "../resources/maps/aw" + mapn + ".png";
+  container.setAttribute("style", "background-image: url(" + string + ");");
+
   let table = document.createElement("table");
   table.className = "theme-table";
-  var numbertd = 0;
+  let numbertd = 0;
   for (let index = 0; index < 14; index++) {
     let tr = document.createElement("tr");
 
@@ -27,7 +31,7 @@ function generateMap() {
 }
 
 function getLetterByIndex(index) {
-  var letters = "abcdefghijklmnopq";
+  let letters = "abcdefghijklmnopq";
   return letters.charAt(index).toUpperCase();
 }
 
@@ -42,11 +46,11 @@ function renderCharacters(players) {
       img.id = element.position;
 
       img.setAttribute("player", player.name);
-      img.setAttribute("name", element.name);
-      img.setAttribute("hp", element.hp);
-      img.setAttribute("attack", element.armor);
-      img.setAttribute("armor", element.armor);
-      img.setAttribute("crit", element.crit);
+      // img.setAttribute("name", element.name);
+      // img.setAttribute("hp", element.hp);
+      // img.setAttribute("attack", element.armor);
+      // img.setAttribute("armor", element.armor);
+      // img.setAttribute("crit", element.crit);
       img.setAttribute("finished", element.turnfinished);
 
       img.addEventListener("click", showInformationInMenu, false);
@@ -55,11 +59,11 @@ function renderCharacters(players) {
       td.appendChild(img);
 
       td.setAttribute("player", player.name);
-      td.setAttribute("name", element.name);
-      td.setAttribute("hp", element.hp);
-      td.setAttribute("attack", element.armor);
-      td.setAttribute("armor", element.armor);
-      td.setAttribute("crit", element.crit);
+      // td.setAttribute("name", element.name);
+      // td.setAttribute("hp", element.hp);
+      // td.setAttribute("attack", element.armor);
+      // td.setAttribute("armor", element.armor);
+      // td.setAttribute("crit", element.crit);
       td.setAttribute("finished", element.turnfinished);
 
       td.addEventListener("click", showInformationInMenu, false);
@@ -79,12 +83,14 @@ function deleteCharactersOnMap() {
   for (let index = 0; index < tds.length; index++) {
     const td = tds[index];
     td.source = "";
-    td.removeAttribute("name");
-    td.removeAttribute("hp");
-    td.removeAttribute("attack");
-    td.removeAttribute("armor");
-    td.removeAttribute("crit");
+    // td.removeAttribute("name");
+    // td.removeAttribute("hp");
+    // td.removeAttribute("attack");
+    // td.removeAttribute("armor");
+    // td.removeAttribute("crit");
     td.removeAttribute("player");
+    td.removeAttribute("finished");
+    td.removeAttribute("class");
 
     var myNode = document.getElementById(td.id);
     while (myNode.firstChild) {
@@ -94,29 +100,24 @@ function deleteCharactersOnMap() {
 }
 
 function deleteClassesTd() {
-  var tds = document.getElementsByTagName("td");
+  let tds = document.getElementsByTagName("td");
 
   for (let index = 0; index < tds.length; index++) {
     const element = tds[index];
-    if (element.getAttribute("finished") == "true") {
-      element.className = "disabled";
-    } else {
-      element.className = "";
-    }
+    element.getAttribute("finished") == "true"
+      ? (element.className = "disabled")
+      : (element.className = "");
   }
 }
 
 function getCharacterByPosition(players, pos) {
-  var a = players.filter(
+  let a = players.filter(
     e => e.name == document.getElementById(pos).getAttribute("player")
   );
-
-  var char = null;
+  let char = null;
 
   a[0].characters.forEach(element => {
-    if (element.position == pos) {
-      char = element;
-    }
+    element.position == pos ? (char = element) : null;
   });
 
   return char;
@@ -124,31 +125,44 @@ function getCharacterByPosition(players, pos) {
 
 function showMovableTiles(e) {
   let a = document.getElementById("info-char").getAttribute("char");
-  var char = getCharacterByPosition(players, a);
-  var tds = document.querySelectorAll("td");
-  var moverange = char.moverange;
-  var currpos = parseInt(e.getAttribute("pos"));
+  let char = getCharacterByPosition(players, a);
+  let tds = document.querySelectorAll("td");
+  let moverange = char.moverange;
+  let currpos = parseInt(e.getAttribute("pos"));
 
   SetNotMovableTd();
 
-  /*
-  /// arriba
+  // arriba
+
   for (let index = 0; index <= moverange; index++) {
-    // let itemid = tds[currpos - index].id.substr(1);
-    // var cp = tds[currpos - index * 17].id.charAt(0);
-    // var mp = tds[currpos].id.charAt(0);
-    // if (cp == mp) {
+    let itemid = tds[currpos - index].id.substr(1);
     try {
-      let toppos = currpos - index * 17;
+      let toppos = currpos - index * 26;
       try {
-        tds[toppos].className = "move";
+        tds[toppos].className = "notmove";
         tds[toppos].setAttribute("movable", "false");
+        try {
+          tds[toppos - 26].className = "notmove";
+        } catch (error) {}
 
         for (let i = 0; i <= moverange - index; i++) {
           try {
-            tds[toppos + i].className = "move";
-            tds[toppos + i].setAttribute("movable", "true");
-            tds[toppos + i].addEventListener("click", moveCharacter, false);
+            let limit = parseInt(tds[toppos + i].id.substring(1));
+            let current = parseInt(tds[toppos].id.substring(1));
+
+            if (limit <= 25 && limit >= current) {
+              tds[toppos + i].className = "move";
+              tds[toppos + i].setAttribute("movable", "true");
+              tds[toppos + i].addEventListener("click", moveCharacter, false);
+
+              tds[toppos + i].getAttribute("player") != null
+                ? (tds[toppos + i].className = "notmove")
+                : null;
+
+              parseInt(tds[toppos + 1 + i].id.substring(1)) >= current
+                ? (tds[toppos + 1 + i].className = "notmove")
+                : null;
+            }
           } catch (error) {}
         }
       } catch (error) {}
@@ -156,84 +170,80 @@ function showMovableTiles(e) {
       try {
         for (let i = 0; i <= moverange - index; i++) {
           try {
-            tds[toppos - i].className = "move";
-            tds[toppos - i].setAttribute("movable", "true");
-            tds[toppos - i].addEventListener("click", moveCharacter, false);
+            let limit = parseInt(tds[toppos - i].id.substring(1));
+            let current = parseInt(tds[toppos].id.substring(1));
+
+            if (limit >= 0 && limit <= current) {
+              tds[toppos - i].className = "move";
+              tds[toppos - i].setAttribute("movable", "true");
+              tds[toppos - i].addEventListener("click", moveCharacter, false);
+
+              tds[toppos - i].getAttribute("player") != null
+                ? (tds[toppos - i].className = "notmove")
+                : null;
+
+              parseInt(tds[toppos - 1 - i].id.substring(1)) <= current
+                ? (tds[toppos - 1 - i].className = "notmove")
+                : null;
+            }
           } catch (error) {}
         }
       } catch (error) {}
     } catch (error) {}
-    // }
   }
-  
+
   /// abajo
 
   for (let index = 0; index <= moverange; index++) {
     try {
-      let toppos = currpos + index * 17;
+      let toppos = currpos + index * 26;
       try {
-        tds[toppos].className = "move";
+        tds[toppos + 26].className = "notmove";
+      } catch (error) {}
+      try {
+        tds[toppos].className = "notmove";
         tds[toppos].setAttribute("movable", "true");
 
         for (let i = 0; i <= moverange - index; i++) {
-          try {
+          let limit = parseInt(tds[toppos + i].id.substring(1));
+          let current = parseInt(tds[toppos].id.substring(1));
+
+          if (limit <= 25 && limit >= current) {
             tds[toppos + i].className = "move";
             tds[toppos + i].setAttribute("movable", "true");
             tds[toppos + i].addEventListener("click", moveCharacter, false);
-          } catch (error) {}
+
+            tds[toppos + i].getAttribute("player") != null
+              ? (tds[toppos + i].className = "notmove")
+              : null;
+
+            parseInt(tds[toppos + 1 + i].id.substring(1)) >= current
+              ? (tds[toppos + 1 + i].className = "notmove")
+              : null;
+          }
         }
       } catch (error) {}
 
       try {
         for (let i = 0; i <= moverange - index; i++) {
-          try {
+          let limit = parseInt(tds[toppos - i].id.substring(1));
+          let current = parseInt(tds[toppos].id.substring(1));
+
+          if (limit >= 0 && limit <= current) {
             tds[toppos - i].className = "move";
             tds[toppos - i].setAttribute("movable", "true");
             tds[toppos - i].addEventListener("click", moveCharacter, false);
-          } catch (error) {}
+
+            tds[toppos - i].getAttribute("player") != null
+              ? (tds[toppos - i].className = "notmove")
+              : null;
+
+            parseInt(tds[toppos - 1 - i].id.substring(1)) <= current
+              ? (tds[toppos - 1 - i].className = "notmove")
+              : null;
+          }
         }
       } catch (error) {}
-    } catch (error) {}
-
-    // }
-  }
-*/
-  /// derecha
-
-  for (let index = 0; index <= moverange; index++) {
-    // let itemid = tds[currpos - index].id.substr(1);
-    try {
-      var cp = tds[currpos + index].id.charAt(0);
-      var mp = tds[currpos].id.charAt(0);
-      if (cp == mp) {
-        if (tds[currpos + index].getAttribute("player") != null) {
-          tds[currpos + index].className = "notmove";
-          tds[currpos + index].setAttribute("movable", "false");
-        } else {
-          tds[currpos + index].className = "move";
-          tds[currpos + index].setAttribute("movable", "true");
-          tds[currpos + index].addEventListener("click", moveCharacter, false);
-        }
-      }
-    } catch (error) {}
-  }
-
-  /// izquierda
-
-  for (let index = moverange; index >= 0; index--) {
-    try {
-      var cp = tds[currpos - index].id.charAt(0);
-      var mp = tds[currpos].id.charAt(0);
-      if (cp == mp) {
-        if (tds[currpos - index].getAttribute("player") != null) {
-          tds[currpos - index].className = "notmove";
-          tds[currpos - index].setAttribute("movable", "false");
-        } else {
-          tds[currpos - index].className = "move";
-          tds[currpos - index].setAttribute("movable", "true");
-          tds[currpos - index].addEventListener("click", moveCharacter, false);
-        }
-      }
     } catch (error) {}
   }
 
@@ -245,7 +255,7 @@ function showMovableTiles(e) {
 }
 
 function SetNotMovableTd() {
-  var tds = document.getElementsByTagName("td");
+  let tds = document.getElementsByTagName("td");
 
   for (let index = 0; index < tds.length; index++) {
     const element = tds[index];
@@ -260,16 +270,18 @@ function SetNotMovableTd() {
 
 function moveCharacter(td) {
   let charid = document.getElementById("info-char");
-  var char = getCharacterByPosition(players, charid.getAttribute("char"));
+  let char = getCharacterByPosition(players, charid.getAttribute("char"));
 
-  var nextMove = td.srcElement.id;
-  char.move(nextMove);
+  if (td.srcElement.getAttribute("player") == null) {
+    var nextMove = td.srcElement.id;
+    char.move(nextMove);
 
-  SetNotMovableTd();
+    SetNotMovableTd();
 
-  disableCharacterAfterMoverOrAttack(nextMove);
-  deleteCharactersOnMap();
-  renderCharacters(players);
+    disableCharacterAfterMoverOrAttack(nextMove);
+    deleteCharactersOnMap();
+    renderCharacters(players);
+  }
 }
 
 function finishTurn(td) {
