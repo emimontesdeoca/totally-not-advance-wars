@@ -50,7 +50,6 @@ function showInformationInMenu(e) {
     btnterminar.disabled = true;
   }
 }
-
 function clearInformationMenu() {
   document.querySelectorAll("td.move").length == 0 ? SetNotMovableTd() : null;
 

@@ -37,6 +37,8 @@ function getLetterByIndex(index) {
 
 function renderCharacters(players) {
   players.forEach(player => {
+    console.log(players.indexOf(player));
+
     player.characters.forEach(element => {
       let td = document.getElementById(element.position);
       // let source_img = (td.innerHTML = "<img src='" + element.source + "'/>");
@@ -75,6 +77,22 @@ function renderCharacters(players) {
       }
     });
   });
+
+  if (advancewars.turn % 2 === 0) {
+    players[1].characters.forEach(element => {
+      disableCharacterAfterMoverOrAttack(element.position);
+      let td = document
+        .getElementById(element.position)
+        .setAttribute("finished", "true");
+    });
+  } else {
+    players[0].characters.forEach(element => {
+      disableCharacterAfterMoverOrAttack(element.position);
+      let td = document
+        .getElementById(element.position)
+        .setAttribute("finished", "true");
+    });
+  }
 }
 
 function deleteCharactersOnMap() {
