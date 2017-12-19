@@ -37,7 +37,7 @@ function showInformationInMenu(e) {
   let btnatacar = document.getElementById("btn-atacar");
   let btnterminar = document.getElementById("btn-terminar");
 
-  console.log(document.getElementById(e.srcElement.id));
+  // console.log(document.getElementById(e.srcElement.id));
   if (
     document.getElementById(e.srcElement.id).getAttribute("finished") == "false"
   ) {
@@ -50,6 +50,7 @@ function showInformationInMenu(e) {
     btnterminar.disabled = true;
   }
 }
+
 function clearInformationMenu() {
   document.querySelectorAll("td.move").length == 0 ? SetNotMovableTd() : null;
 

@@ -1,17 +1,19 @@
-function generateMap() {
+const trsize = 15;
+const tdsize = 24;
+
+function generateMap(mapnumber) {
   let container = document.getElementById("map");
 
-  let mapn = Math.floor(Math.random() * 3);
-  let string = "../resources/maps/aw" + mapn + ".png";
+  let string = "../resources/maps/aw" + mapnumber + ".png";
   container.setAttribute("style", "background-image: url(" + string + ");");
 
   let table = document.createElement("table");
   table.className = "theme-table";
   let numbertd = 0;
-  for (let index = 0; index < 14; index++) {
+  for (let index = 0; index < trsize; index++) {
     let tr = document.createElement("tr");
 
-    for (let i = 0; i < 26; i++) {
+    for (let i = 0; i < tdsize; i++) {
       let td = document.createElement("td");
       let id = getLetterByIndex(index) + i;
       td.id = id;
@@ -37,7 +39,7 @@ function getLetterByIndex(index) {
 
 function renderCharacters(players) {
   players.forEach(player => {
-    console.log(players.indexOf(player));
+    // console.log(players.indexOf(player));
 
     player.characters.forEach(element => {
       let td = document.getElementById(element.position);
@@ -85,12 +87,25 @@ function renderCharacters(players) {
         .getElementById(element.position)
         .setAttribute("finished", "true");
     });
+
+    players[0].characters.forEach(element => {
+      // disableCharacterAfterMoverOrAttack(element.position);
+      let td = document
+        .getElementById(element.position)
+        .setAttribute("finished", "false");
+    });
   } else {
     players[0].characters.forEach(element => {
       disableCharacterAfterMoverOrAttack(element.position);
       let td = document
         .getElementById(element.position)
         .setAttribute("finished", "true");
+    });
+    players[1].characters.forEach(element => {
+      // disableCharacterAfterMoverOrAttack(element.position);
+      let td = document
+        .getElementById(element.position)
+        .setAttribute("finished", "false");
     });
   }
 }
@@ -155,12 +170,12 @@ function showMovableTiles(e) {
   for (let index = 0; index <= moverange; index++) {
     let itemid = tds[currpos - index].id.substr(1);
     try {
-      let toppos = currpos - index * 26;
+      let toppos = currpos - index * tdsize;
       try {
         tds[toppos].className = "notmove";
         tds[toppos].setAttribute("movable", "false");
         try {
-          tds[toppos - 26].className = "notmove";
+          tds[toppos - tdsize].className = "notmove";
         } catch (error) {}
 
         for (let i = 0; i <= moverange - index; i++) {
@@ -168,7 +183,7 @@ function showMovableTiles(e) {
             let limit = parseInt(tds[toppos + i].id.substring(1));
             let current = parseInt(tds[toppos].id.substring(1));
 
-            if (limit <= 25 && limit >= current) {
+            if (limit <= tdsize - 1 && limit >= current) {
               tds[toppos + i].className = "move";
               tds[toppos + i].setAttribute("movable", "true");
               tds[toppos + i].addEventListener("click", moveCharacter, false);
@@ -214,9 +229,9 @@ function showMovableTiles(e) {
 
   for (let index = 0; index <= moverange; index++) {
     try {
-      let toppos = currpos + index * 26;
+      let toppos = currpos + index * tdsize;
       try {
-        tds[toppos + 26].className = "notmove";
+        tds[toppos + tdsize].className = "notmove";
       } catch (error) {}
       try {
         tds[toppos].className = "notmove";
@@ -226,7 +241,7 @@ function showMovableTiles(e) {
           let limit = parseInt(tds[toppos + i].id.substring(1));
           let current = parseInt(tds[toppos].id.substring(1));
 
-          if (limit <= 25 && limit >= current) {
+          if (limit <= tdsize - 1 && limit >= current) {
             tds[toppos + i].className = "move";
             tds[toppos + i].setAttribute("movable", "true");
             tds[toppos + i].addEventListener("click", moveCharacter, false);

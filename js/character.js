@@ -70,7 +70,7 @@ const characters = [
 ];
 
 class character {
-  constructor(pos, team) {
+  constructor(player, pos, team) {
     let sourcepath = mappath;
     let item = characters[Math.floor(Math.random() * characters.length)];
     this.name = item.name;
@@ -87,10 +87,14 @@ class character {
     this.face = item.face;
     this.position = pos;
     this.turnfinished = false;
+    this.player = player;
   }
   move(pos) {
     this.position = pos;
     this.turnfinished = true;
+    if (this.player.checkIfTurnFinished()) {
+      advancewars.nextRound();
+    }
   }
   attackCharacter(character) {
     character.hp -= this.attack;
