@@ -80,34 +80,36 @@ function renderCharacters(players) {
     });
   });
 
-  if (advancewars.turn % 2 === 0) {
-    players[1].characters.forEach(element => {
-      disableCharacterAfterMoverOrAttack(element.position);
-      let td = document
-        .getElementById(element.position)
-        .setAttribute("finished", "true");
-    });
+  /// THIS FUCKING BULLSHIT NEEDS TO BE FIXED
 
-    players[0].characters.forEach(element => {
-      // disableCharacterAfterMoverOrAttack(element.position);
-      let td = document
-        .getElementById(element.position)
-        .setAttribute("finished", "false");
-    });
-  } else {
-    players[0].characters.forEach(element => {
-      disableCharacterAfterMoverOrAttack(element.position);
-      let td = document
-        .getElementById(element.position)
-        .setAttribute("finished", "true");
-    });
-    players[1].characters.forEach(element => {
-      // disableCharacterAfterMoverOrAttack(element.position);
-      let td = document
-        .getElementById(element.position)
-        .setAttribute("finished", "false");
-    });
-  }
+  // if (advancewars.turn % 2 === 0) {
+  //   players[1].characters.forEach(element => {
+  //     disableCharacterAfterMoverOrAttack(element.position);
+  //     let td = document
+  //       .getElementById(element.position)
+  //       .setAttribute("finished", "true");
+  //   });
+
+  //   players[0].characters.forEach(element => {
+  //     // disableCharacterAfterMoverOrAttack(element.position);
+  //     let td = document
+  //       .getElementById(element.position)
+  //       .setAttribute("finished", "false");
+  //   });
+  // } else {
+  //   players[0].characters.forEach(element => {
+  //     disableCharacterAfterMoverOrAttack(element.position);
+  //     let td = document
+  //       .getElementById(element.position)
+  //       .setAttribute("finished", "true");
+  //   });
+  //   players[1].characters.forEach(element => {
+  //     // disableCharacterAfterMoverOrAttack(element.position);
+  //     let td = document
+  //       .getElementById(element.position)
+  //       .setAttribute("finished", "false");
+  //   });
+  // }
 }
 
 function deleteCharactersOnMap() {
