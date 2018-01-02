@@ -37,10 +37,20 @@ function getLetterByIndex(index) {
   return letters.charAt(index).toUpperCase();
 }
 
+function enableCharactersByTurn(turn) {
+  if (turn % 2 == 0) {
+    players[0].characters.forEach(element => {
+      element.turnfinished = false;
+    });
+  } else {
+    players[1].characters.forEach(element => {
+      element.turnfinished = false;
+    });
+  }
+}
+
 function renderCharacters(players) {
   players.forEach(player => {
-    // console.log(players.indexOf(player));
-
     player.characters.forEach(element => {
       let td = document.getElementById(element.position);
       // let source_img = (td.innerHTML = "<img src='" + element.source + "'/>");
@@ -50,28 +60,14 @@ function renderCharacters(players) {
       img.id = element.position;
 
       img.setAttribute("player", player.name);
-      // img.setAttribute("name", element.name);
-      // img.setAttribute("hp", element.hp);
-      // img.setAttribute("attack", element.armor);
-      // img.setAttribute("armor", element.armor);
-      // img.setAttribute("crit", element.crit);
       img.setAttribute("finished", element.turnfinished);
-
       img.addEventListener("click", showInformationInMenu, false);
-      // img.addEventListener("click", showMovableTiles, false);
 
       td.appendChild(img);
 
       td.setAttribute("player", player.name);
-      // td.setAttribute("name", element.name);
-      // td.setAttribute("hp", element.hp);
-      // td.setAttribute("attack", element.armor);
-      // td.setAttribute("armor", element.armor);
-      // td.setAttribute("crit", element.crit);
       td.setAttribute("finished", element.turnfinished);
-
       td.addEventListener("click", showInformationInMenu, false);
-      // td.addEventListener("click", showMovableTiles, false);
 
       if (element.turnfinished) {
         img.className = "disabled";
@@ -79,37 +75,39 @@ function renderCharacters(players) {
       }
     });
   });
+}
 
+function disablePlayerAfterTurn() {
   /// THIS FUCKING BULLSHIT NEEDS TO BE FIXED
 
-  // if (advancewars.turn % 2 === 0) {
-  //   players[1].characters.forEach(element => {
-  //     disableCharacterAfterMoverOrAttack(element.position);
-  //     let td = document
-  //       .getElementById(element.position)
-  //       .setAttribute("finished", "true");
-  //   });
+  if (advancewars.turn % 2 === 0) {
+    players[1].characters.forEach(element => {
+      disableCharacterAfterMoverOrAttack(element.position);
+      let td = document
+        .getElementById(element.position)
+        .setAttribute("finished", "true");
+    });
 
-  //   players[0].characters.forEach(element => {
-  //     // disableCharacterAfterMoverOrAttack(element.position);
-  //     let td = document
-  //       .getElementById(element.position)
-  //       .setAttribute("finished", "false");
-  //   });
-  // } else {
-  //   players[0].characters.forEach(element => {
-  //     disableCharacterAfterMoverOrAttack(element.position);
-  //     let td = document
-  //       .getElementById(element.position)
-  //       .setAttribute("finished", "true");
-  //   });
-  //   players[1].characters.forEach(element => {
-  //     // disableCharacterAfterMoverOrAttack(element.position);
-  //     let td = document
-  //       .getElementById(element.position)
-  //       .setAttribute("finished", "false");
-  //   });
-  // }
+    players[0].characters.forEach(element => {
+      disableCharacterAfterMoverOrAttack(element.position);
+      let td = document
+        .getElementById(element.position)
+        .setAttribute("finished", "false");
+    });
+  } else {
+    players[0].characters.forEach(element => {
+      disableCharacterAfterMoverOrAttack(element.position);
+      let td = document
+        .getElementById(element.position)
+        .setAttribute("finished", "true");
+    });
+    players[1].characters.forEach(element => {
+      disableCharacterAfterMoverOrAttack(element.position);
+      let td = document
+        .getElementById(element.position)
+        .setAttribute("finished", "false");
+    });
+  }
 }
 
 function deleteCharactersOnMap() {

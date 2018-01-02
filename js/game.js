@@ -15,6 +15,7 @@ class game {
 
   nextRound() {
     this.turn++;
+    enableCharactersByTurn(this.turn);
     deleteCharactersOnMap();
     renderCharacters(players);
   }

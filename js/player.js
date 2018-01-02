@@ -2,6 +2,7 @@ const player1_letters = ["B", "C", "D", "E", "F"];
 const player1_numbers = [0, 1, 2, 3, 4, 5];
 const player2_letters = ["J", "K", "L", "M", "N"];
 const player2_numbers = [18, 19, 20, 21, 22, 23];
+const player_size = 2;
 
 class player {
   constructor(name, team) {
@@ -11,7 +12,7 @@ class player {
     let ids = [];
     switch (team) {
       case 1:
-        for (let index = 0; index < 5; index++) {
+        for (let index = 0; index < player_size; index++) {
           do {
             var id_letter =
               player1_letters[
@@ -29,7 +30,7 @@ class player {
         }
         break;
       case 2:
-        for (let index = 0; index < 5; index++) {
+        for (let index = 0; index < player_size; index++) {
           do {
             var id_letter =
               player2_letters[
@@ -58,7 +59,7 @@ class player {
       }
     });
     cont === this.characters.length ? (res = true) : (res = false);
-    console.log(cont);
+    // console.log(cont);
     return res;
   }
 }
