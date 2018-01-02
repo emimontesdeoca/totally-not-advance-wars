@@ -92,9 +92,7 @@ class character {
   move(pos) {
     this.position = pos;
     this.turnfinished = true;
-    if (this.player.checkIfTurnFinished()) {
-      advancewars.nextRound();
-    }
+    this.player.checkIfTurnFinished() == true ? advancewars.nextRound() : null;
   }
   attackCharacter(character) {
     character.hp -= this.attack;

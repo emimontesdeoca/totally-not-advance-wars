@@ -22,6 +22,7 @@ class game {
 
   load() {
     generateMap(this.mapnumber);
+    enableCharactersByTurn(this.turn);
     renderCharacters(players);
   }
 }

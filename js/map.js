@@ -77,50 +77,12 @@ function renderCharacters(players) {
   });
 }
 
-function disablePlayerAfterTurn() {
-  /// THIS FUCKING BULLSHIT NEEDS TO BE FIXED
-
-  if (advancewars.turn % 2 === 0) {
-    players[1].characters.forEach(element => {
-      disableCharacterAfterMoverOrAttack(element.position);
-      let td = document
-        .getElementById(element.position)
-        .setAttribute("finished", "true");
-    });
-
-    players[0].characters.forEach(element => {
-      disableCharacterAfterMoverOrAttack(element.position);
-      let td = document
-        .getElementById(element.position)
-        .setAttribute("finished", "false");
-    });
-  } else {
-    players[0].characters.forEach(element => {
-      disableCharacterAfterMoverOrAttack(element.position);
-      let td = document
-        .getElementById(element.position)
-        .setAttribute("finished", "true");
-    });
-    players[1].characters.forEach(element => {
-      disableCharacterAfterMoverOrAttack(element.position);
-      let td = document
-        .getElementById(element.position)
-        .setAttribute("finished", "false");
-    });
-  }
-}
-
 function deleteCharactersOnMap() {
   var tds = document.getElementsByTagName("td");
 
   for (let index = 0; index < tds.length; index++) {
     const td = tds[index];
     td.source = "";
-    // td.removeAttribute("name");
-    // td.removeAttribute("hp");
-    // td.removeAttribute("attack");
-    // td.removeAttribute("armor");
-    // td.removeAttribute("crit");
     td.removeAttribute("player");
     td.removeAttribute("finished");
     td.removeAttribute("class");
@@ -147,6 +109,7 @@ function getCharacterByPosition(players, pos) {
   let a = players.filter(
     e => e.name == document.getElementById(pos).getAttribute("player")
   );
+
   let char = null;
 
   a[0].characters.forEach(element => {
@@ -178,6 +141,8 @@ function showMovableTiles(e) {
           tds[toppos - tdsize].className = "notmove";
         } catch (error) {}
 
+        // derecha
+
         for (let i = 0; i <= moverange - index; i++) {
           try {
             let limit = parseInt(tds[toppos + i].id.substring(1));
@@ -199,6 +164,8 @@ function showMovableTiles(e) {
           } catch (error) {}
         }
       } catch (error) {}
+
+      // izquierda
 
       try {
         for (let i = 0; i <= moverange - index; i++) {
@@ -237,6 +204,8 @@ function showMovableTiles(e) {
         tds[toppos].className = "notmove";
         tds[toppos].setAttribute("movable", "true");
 
+        // derecha
+
         for (let i = 0; i <= moverange - index; i++) {
           let limit = parseInt(tds[toppos + i].id.substring(1));
           let current = parseInt(tds[toppos].id.substring(1));
@@ -256,6 +225,8 @@ function showMovableTiles(e) {
           }
         }
       } catch (error) {}
+
+      // izquierda
 
       try {
         for (let i = 0; i <= moverange - index; i++) {
