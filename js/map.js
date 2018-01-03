@@ -258,6 +258,173 @@ function showMovableTiles(e) {
   charmenu.style.display = "none";
 }
 
+function showAttackableTiles(e) {
+  let a = document.getElementById("info-char").getAttribute("char");
+  let char = getCharacterByPosition(players, a);
+  let tds = document.querySelectorAll("td");
+  let moverange = char.attackrange;
+  let currpos = parseInt(e.getAttribute("pos"));
+
+  SetNotMovableTd();
+
+  // arriba
+
+  for (let index = 0; index <= moverange; index++) {
+    let itemid = tds[currpos - index].id.substr(1);
+    try {
+      let toppos = currpos - index * tdsize;
+      try {
+        tds[toppos].className = "notmove";
+        tds[toppos].setAttribute("movable", "false");
+        try {
+          tds[toppos - tdsize].className = "notmove";
+        } catch (error) {}
+
+        // derecha
+
+        for (let i = 0; i <= moverange - index; i++) {
+          try {
+            let limit = parseInt(tds[toppos + i].id.substring(1));
+            let current = parseInt(tds[toppos].id.substring(1));
+
+            if (limit <= tdsize - 1 && limit >= current) {
+              tds[toppos + i].getAttribute("player") != null
+                ? (tds[toppos + i].className = "notmove")
+                : null;
+
+              if (
+                tds[toppos + i].getAttribute("player") ==
+                tds[currpos].getAttribute("player")
+              ) {
+                tds[toppos + i].className = "notmove";
+              } else if (
+                tds[toppos + i].getAttribute("player") !=
+                  tds[currpos].getAttribute("player") &&
+                tds[toppos + i].getAttribute("player") != null
+              ) {
+                tds[toppos + i].className = "attack";
+                tds[toppos + i].addEventListener("click", moveCharacter, false);
+              }
+
+              parseInt(tds[toppos + 1 + i].id.substring(1)) >= current
+                ? (tds[toppos + 1 + i].className = "notmove")
+                : null;
+            }
+          } catch (error) {}
+        }
+      } catch (error) {}
+
+      // izquierda
+
+      try {
+        for (let i = 0; i <= moverange - index; i++) {
+          try {
+            let limit = parseInt(tds[toppos - i].id.substring(1));
+            let current = parseInt(tds[toppos].id.substring(1));
+
+            if (limit >= 0 && limit <= current) {
+              if (
+                tds[toppos - i].getAttribute("player") ==
+                tds[currpos].getAttribute("player")
+              ) {
+                tds[toppos - i].className = "notmove";
+              } else if (
+                tds[toppos - i].getAttribute("player") !=
+                  tds[currpos].getAttribute("player") &&
+                tds[toppos - i].getAttribute("player") != null
+              ) {
+                tds[toppos - i].className = "attack";
+                // tds[toppos - i].addEventListener("click", moveCharacter, false);
+              }
+
+              parseInt(tds[toppos - 1 - i].id.substring(1)) <= current
+                ? (tds[toppos - 1 - i].className = "notmove")
+                : null;
+            }
+          } catch (error) {}
+        }
+      } catch (error) {}
+    } catch (error) {}
+  }
+
+  /// abajo
+
+  for (let index = 0; index <= moverange; index++) {
+    try {
+      let toppos = currpos + index * tdsize;
+      try {
+        tds[toppos + tdsize].className = "notmove";
+      } catch (error) {}
+      try {
+        tds[toppos].className = "notmove";
+        tds[toppos].setAttribute("movable", "true");
+
+        // derecha
+
+        for (let i = 0; i <= moverange - index; i++) {
+          let limit = parseInt(tds[toppos + i].id.substring(1));
+          let current = parseInt(tds[toppos].id.substring(1));
+
+          if (limit <= tdsize - 1 && limit >= current) {
+            if (
+              tds[toppos + i].getAttribute("player") ==
+              tds[currpos].getAttribute("player")
+            ) {
+              tds[toppos + i].className = "notmove";
+            } else if (
+              tds[toppos + i].getAttribute("player") !=
+                tds[currpos].getAttribute("player") &&
+              tds[toppos + i].getAttribute("player") != null
+            ) {
+              tds[toppos + i].className = "attack";
+              tds[toppos + i].addEventListener("click", moveCharacter, false);
+            }
+
+            parseInt(tds[toppos + 1 + i].id.substring(1)) >= current
+              ? (tds[toppos + 1 + i].className = "notmove")
+              : null;
+          }
+        }
+      } catch (error) {}
+
+      // izquierda
+
+      try {
+        for (let i = 0; i <= moverange - index; i++) {
+          let limit = parseInt(tds[toppos - i].id.substring(1));
+          let current = parseInt(tds[toppos].id.substring(1));
+
+          if (limit >= 0 && limit <= current) {
+            if (
+              tds[toppos - i].getAttribute("player") ==
+              tds[currpos].getAttribute("player")
+            ) {
+              tds[toppos - i].className = "notmove";
+            } else if (
+              tds[toppos - i].getAttribute("player") !=
+                tds[currpos].getAttribute("player") &&
+              tds[toppos - i].getAttribute("player") != null
+            ) {
+              tds[toppos - i].className = "attack";
+              // tds[toppos - i].addEventListener("click", moveCharacter, false);
+            }
+
+            parseInt(tds[toppos - 1 - i].id.substring(1)) <= current
+              ? (tds[toppos - 1 - i].className = "notmove")
+              : null;
+          }
+        }
+      } catch (error) {}
+    } catch (error) {}
+  }
+
+  tds[currpos].setAttribute("movable", "false");
+  tds[currpos].removeEventListener("click", moveCharacter, false);
+
+  let charmenu = document.getElementById("char-menu");
+  charmenu.style.display = "none";
+}
+
 function SetNotMovableTd() {
   let tds = document.getElementsByTagName("td");
 
@@ -265,12 +432,15 @@ function SetNotMovableTd() {
     const element = tds[index];
     if (element.getAttribute("movable") == "true") {
       element.removeEventListener("click", moveCharacter, false);
+      element.removeEventListener("click", attackCharacter, false);
       element.setAttribute("movable", "false");
     } else {
       element.setAttribute("movable", "false");
     }
   }
 }
+
+/// pending work
 
 function moveCharacter(td) {
   let charid = document.getElementById("info-char");
@@ -279,6 +449,22 @@ function moveCharacter(td) {
   if (td.srcElement.getAttribute("player") == null) {
     var nextMove = td.srcElement.id;
     char.move(nextMove);
+
+    SetNotMovableTd();
+
+    disableCharacterAfterMoverOrAttack(nextMove);
+    deleteCharactersOnMap();
+    renderCharacters(players);
+  }
+}
+
+function attackCharacter(td) {
+  let charid = document.getElementById("info-char");
+  let char = getCharacterByPosition(players, charid.getAttribute("char"));
+
+  if (td.srcElement.getAttribute("player") == null) {
+    var nextMove = td.srcElement.id;
+    char.attackCharacter(getCharacterByPosition(players, nextMove));
 
     SetNotMovableTd();
 

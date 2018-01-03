@@ -95,6 +95,14 @@ function showMovableTilesOfLoadedCharacter() {
   showMovableTiles(elementChar);
 }
 
+function showAttackableTilesOfLoadedCharacter() {
+  let charid = document.getElementById("info-char");
+
+  let id = charid.getAttribute("char");
+  let elementChar = document.getElementById(id);
+  showAttackableTiles(elementChar);
+}
+
 function disableButtons() {
   // let btnmover = document.getElementById("btn-mover");
   // let btnatacar = document.getElementById("btn-atacar");

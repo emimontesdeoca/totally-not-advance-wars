@@ -3,7 +3,7 @@ const player1_numbers = [0, 1, 2, 3, 4, 5];
 const player2_letters = ["J", "K", "L", "M", "N"];
 const player2_numbers = [18, 19, 20, 21, 22, 23];
 const player1_size = 2;
-const player2_size = 5;
+const player2_size = 2;
 
 class player {
   constructor(name, team) {
