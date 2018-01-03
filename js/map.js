@@ -4,7 +4,8 @@ const tdsize = 24;
 function generateMap(mapnumber) {
   let container = document.getElementById("map");
 
-  let string = "../resources/maps/aw" + mapnumber + ".png";
+  let string = "resources/maps/aw" + mapnumber + ".png";
+  console.log(string);
   container.setAttribute("style", "background-image: url(" + string + ");");
 
   let table = document.createElement("table");

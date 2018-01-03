@@ -1,5 +1,5 @@
-const mappath = "../resources/characters/map/";
-const facepath = "../resources/hud/faces/";
+const mappath = "resources/characters/map/";
+const facepath = "resources/hud/faces/";
 const characters = [
   {
     name: "army",
