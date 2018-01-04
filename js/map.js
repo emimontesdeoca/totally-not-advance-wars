@@ -43,7 +43,13 @@ function enableCharactersByTurn(turn) {
     players[0].characters.forEach(element => {
       element.turnfinished = false;
     });
+    players[1].characters.forEach(element => {
+      element.turnfinished = true;
+    });
   } else {
+    players[0].characters.forEach(element => {
+      element.turnfinished = true;
+    });
     players[1].characters.forEach(element => {
       element.turnfinished = false;
     });
@@ -304,7 +310,11 @@ function showAttackableTiles(e) {
                 tds[toppos + i].getAttribute("player") != null
               ) {
                 tds[toppos + i].className = "attack";
-                tds[toppos + i].addEventListener("click", moveCharacter, false);
+                tds[toppos + i].addEventListener(
+                  "click",
+                  attackCharacter,
+                  false
+                );
               }
 
               parseInt(tds[toppos + 1 + i].id.substring(1)) >= current
@@ -335,7 +345,11 @@ function showAttackableTiles(e) {
                 tds[toppos - i].getAttribute("player") != null
               ) {
                 tds[toppos - i].className = "attack";
-                // tds[toppos - i].addEventListener("click", moveCharacter, false);
+                tds[toppos - i].addEventListener(
+                  "click",
+                  attackCharacter,
+                  false
+                );
               }
 
               parseInt(tds[toppos - 1 - i].id.substring(1)) <= current
@@ -378,7 +392,7 @@ function showAttackableTiles(e) {
               tds[toppos + i].getAttribute("player") != null
             ) {
               tds[toppos + i].className = "attack";
-              tds[toppos + i].addEventListener("click", moveCharacter, false);
+              tds[toppos + i].addEventListener("click", attackCharacter, false);
             }
 
             parseInt(tds[toppos + 1 + i].id.substring(1)) >= current
@@ -407,7 +421,7 @@ function showAttackableTiles(e) {
               tds[toppos - i].getAttribute("player") != null
             ) {
               tds[toppos - i].className = "attack";
-              // tds[toppos - i].addEventListener("click", moveCharacter, false);
+              tds[toppos - i].addEventListener("click", attackCharacter, false);
             }
 
             parseInt(tds[toppos - 1 - i].id.substring(1)) <= current
@@ -463,7 +477,7 @@ function attackCharacter(td) {
   let charid = document.getElementById("info-char");
   let char = getCharacterByPosition(players, charid.getAttribute("char"));
 
-  if (td.srcElement.getAttribute("player") == null) {
+  if (td.srcElement.getAttribute("player") != null) {
     var nextMove = td.srcElement.id;
     char.attackCharacter(getCharacterByPosition(players, nextMove));
 
@@ -485,6 +499,8 @@ function finishTurn(td) {
   charmenu.style.display = "none";
 
   SetNotMovableTd();
+
+  disableCharacterAfterMoverOrAttack(charid.getAttribute("char"));
   deleteCharactersOnMap();
   renderCharacters(players);
 }
