@@ -57,29 +57,39 @@ function enableCharactersByTurn(turn) {
 }
 
 function renderCharacters(players) {
+
+
+
   players.forEach(player => {
     player.characters.forEach(element => {
-      let td = document.getElementById(element.position);
-      // let source_img = (td.innerHTML = "<img src='" + element.source + "'/>");
-
-      let img = document.createElement("img");
-      img.src = element.source;
-      img.id = element.position;
-
-      img.setAttribute("player", player.name);
-      img.setAttribute("finished", element.turnfinished);
-      img.addEventListener("click", showInformationInMenu, false);
-
-      td.appendChild(img);
-
-      td.setAttribute("player", player.name);
-      td.setAttribute("finished", element.turnfinished);
-      td.addEventListener("click", showInformationInMenu, false);
-
-      if (element.turnfinished) {
-        img.className = "disabled";
-        td.className = "disabled";
+      if (element.hp <= 0) {
+        var index = player.characters.indexOf(element);
+        console.log("index: " + index);
+        player.deleteCharacter(index);
+      }else{
+        let td = document.getElementById(element.position);
+        // let source_img = (td.innerHTML = "<img src='" + element.source + "'/>");
+  
+        let img = document.createElement("img");
+        img.src = element.source;
+        img.id = element.position;
+  
+        img.setAttribute("player", player.name);
+        img.setAttribute("finished", element.turnfinished);
+        img.addEventListener("click", showInformationInMenu, false);
+  
+        td.appendChild(img);
+  
+        td.setAttribute("player", player.name);
+        td.setAttribute("finished", element.turnfinished);
+        td.addEventListener("click", showInformationInMenu, false);
+  
+        if (element.turnfinished) {
+          img.className = "disabled";
+          td.className = "disabled";
+        }
       }
+      
     });
   });
 }
@@ -309,6 +319,7 @@ function showAttackableTiles(e) {
                   tds[currpos].getAttribute("player") &&
                 tds[toppos + i].getAttribute("player") != null
               ) {
+                tds[toppos + i].setAttribute("attackable", "true");
                 tds[toppos + i].className = "attack";
                 tds[toppos + i].addEventListener(
                   "click",
@@ -344,6 +355,7 @@ function showAttackableTiles(e) {
                   tds[currpos].getAttribute("player") &&
                 tds[toppos - i].getAttribute("player") != null
               ) {
+                tds[toppos - i].setAttribute("attackable", "true");
                 tds[toppos - i].className = "attack";
                 tds[toppos - i].addEventListener(
                   "click",
@@ -392,6 +404,7 @@ function showAttackableTiles(e) {
               tds[toppos + i].getAttribute("player") != null
             ) {
               tds[toppos + i].className = "attack";
+              tds[toppos + i].setAttribute("attackable", "true");
               tds[toppos + i].addEventListener("click", attackCharacter, false);
             }
 
@@ -421,6 +434,7 @@ function showAttackableTiles(e) {
               tds[toppos - i].getAttribute("player") != null
             ) {
               tds[toppos - i].className = "attack";
+              tds[toppos - i].setAttribute("attackable", "true");
               tds[toppos - i].addEventListener("click", attackCharacter, false);
             }
 
@@ -434,6 +448,7 @@ function showAttackableTiles(e) {
   }
 
   tds[currpos].setAttribute("movable", "false");
+  tds[currpos].setAttribute("attackable", "attacker");
   tds[currpos].removeEventListener("click", moveCharacter, false);
 
   let charmenu = document.getElementById("char-menu");
@@ -447,10 +462,16 @@ function SetNotMovableTd() {
     const element = tds[index];
     if (element.getAttribute("movable") == "true") {
       element.removeEventListener("click", moveCharacter, false);
-      element.removeEventListener("click", attackCharacter, false);
       element.setAttribute("movable", "false");
     } else {
       element.setAttribute("movable", "false");
+    }
+
+    if (element.getAttribute("attackable") == "true" || element.getAttribute("attackable") == "attacker") {
+      element.removeEventListener("click", attackCharacter, false);
+      element.setAttribute("attackable", "false");
+    } else {
+      element.setAttribute("attackable", "false");
     }
   }
 }
@@ -474,8 +495,9 @@ function moveCharacter(td) {
 }
 
 function attackCharacter(td) {
-  let charid = document.getElementById("info-char");
-  let char = getCharacterByPosition(players, charid.getAttribute("char"));
+  var attacker = document.querySelectorAll('td[attackable="attacker"');
+  // let charid = document.getElementById("info-char");
+  let char = getCharacterByPosition(players, attacker[0].getAttribute("id"));
 
   if (td.srcElement.getAttribute("player") != null) {
     var nextMove = td.srcElement.id;

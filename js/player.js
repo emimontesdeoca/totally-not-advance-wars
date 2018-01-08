@@ -63,4 +63,8 @@ class player {
     // console.log(cont);
     return res;
   }
+
+  deleteCharacter(index) {
+    this.characters.splice(index, 1);
+  }
 }

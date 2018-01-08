@@ -96,6 +96,7 @@ class character {
   }
   attackCharacter(character) {
     character.hp -= this.attack;
+    
     this.turnfinished = true;
     this.player.checkIfTurnFinished() == true ? advancewars.nextRound() : null;
   }

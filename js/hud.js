@@ -52,7 +52,13 @@ function showInformationInMenu(e) {
 }
 
 function clearInformationMenu() {
-  document.querySelectorAll("td.move").length == 0 ? SetNotMovableTd() : null;
+  if (document.querySelectorAll("td.move").length == 0 && document.querySelectorAll("td.attack").length == 0) {
+    document.querySelectorAll("td.move").length == 0 ? SetNotMovableTd() : null;
+    document.querySelectorAll("td.attack").length == 0 ? SetNotMovableTd() : null;
+  }
+
+  // document.querySelectorAll("td.move").length == 0 ? SetNotMovableTd() : null;
+  // document.querySelectorAll("td.attack").length == 0 ? SetNotMovableTd() : null;
 
   let charid = document.getElementById("info-char");
 
