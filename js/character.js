@@ -90,17 +90,31 @@ class character {
     this.player = player;
   }
   move(pos) {
+    var msg = "Moved " + this.name + " from " + this.position + " to " + pos;
+    log(this.player.name, advancewars.turn, msg);
+
     this.position = pos;
     this.turnfinished = true;
     this.player.checkIfTurnFinished() == true ? advancewars.nextRound() : null;
   }
   attackCharacter(character) {
+    var msg =
+      "Atacked " +
+      character.name +
+      " with " +
+      this.name +
+      " and dealt " +
+      this.attack +
+      " damage.";
+    log(this.player.name, advancewars.turn, msg);
     character.hp -= this.attack;
-    
+
     this.turnfinished = true;
     this.player.checkIfTurnFinished() == true ? advancewars.nextRound() : null;
   }
   finishTurn() {
+    var msg = "Finished " + this.name + " turn on " + this.position + ".";
+    log(this.player.name, advancewars.turn, msg);
     this.turnfinished = true;
     this.player.checkIfTurnFinished() == true ? advancewars.nextRound() : null;
   }

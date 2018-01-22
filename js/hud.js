@@ -52,9 +52,14 @@ function showInformationInMenu(e) {
 }
 
 function clearInformationMenu() {
-  if (document.querySelectorAll("td.move").length == 0 && document.querySelectorAll("td.attack").length == 0) {
+  if (
+    document.querySelectorAll("td.move").length == 0 &&
+    document.querySelectorAll("td.attack").length == 0
+  ) {
     document.querySelectorAll("td.move").length == 0 ? SetNotMovableTd() : null;
-    document.querySelectorAll("td.attack").length == 0 ? SetNotMovableTd() : null;
+    document.querySelectorAll("td.attack").length == 0
+      ? SetNotMovableTd()
+      : null;
   }
 
   // document.querySelectorAll("td.move").length == 0 ? SetNotMovableTd() : null;
@@ -128,4 +133,25 @@ function finishTurno() {
   charinformation.finishTurno = true;
   deleteCharactersOnMap();
   renderCharacters(players);
+}
+
+function log(player, turn, message) {
+  var cont = document.getElementById("log");
+
+  let p = document.createElement("p");
+  p.setAttribute("class", "log");
+
+  let spanPlayer = document.createElement("span");
+  spanPlayer.innerHTML = player + " - ";
+  p.appendChild(spanPlayer);
+
+  let spanTurn = document.createElement("span");
+  spanTurn.innerHTML = "day " + turn + " - ";
+  p.appendChild(spanTurn);
+
+  let spanMessage = document.createElement("span");
+  spanMessage.innerHTML = message;
+  p.appendChild(spanMessage);
+
+  cont.appendChild(p);
 }
