@@ -90,7 +90,8 @@ class character {
     this.player = player;
   }
   move(pos) {
-    var msg = "Moved " + this.name + " from " + this.position + " to " + pos;
+    var msg =
+      "Moved " + this.name + " from " + this.position + " to " + pos + ".";
     log(this.player.name, advancewars.turn, msg);
 
     this.position = pos;
