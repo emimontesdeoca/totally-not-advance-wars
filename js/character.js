@@ -91,7 +91,13 @@ class character {
   }
   move(pos) {
     var msg =
-      "Moved " + this.name + " from " + this.position + " to " + pos + ".";
+      "Moved " +
+      this.name +
+      " from <b>" +
+      this.position +
+      "</b> to " +
+      pos +
+      "!";
     log(this.player.name, advancewars.turn, msg);
 
     this.position = pos;
@@ -104,9 +110,9 @@ class character {
       character.name +
       " with " +
       this.name +
-      " and dealt " +
+      " and dealt <b>" +
       this.attack +
-      " damage.";
+      "</b> damage!";
     log(this.player.name, advancewars.turn, msg);
     character.hp -= this.attack;
 

@@ -14,6 +14,7 @@ class game {
   }
 
   nextRound() {
+    logMaster("<b>GAME</b> - Finished day <b>" + this.turn + "</b>!");
     this.turn++;
     enableCharactersByTurn(this.turn);
     deleteCharactersOnMap();
@@ -21,8 +22,19 @@ class game {
   }
 
   load() {
+    logMaster("<b>GAME</b> - Starting game!");
     generateMap(this.mapnumber);
+    logMaster("<b>GAME</b> - Loaded map!");
     enableCharactersByTurn(this.turn);
     renderCharacters(players);
+    players.forEach(element => {
+      logMaster(
+        "<b>GAME</b> - Loaded " +
+          element.name +
+          " with " +
+          element.characters.length +
+          " allies!"
+      );
+    });
   }
 }

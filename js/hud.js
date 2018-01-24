@@ -142,7 +142,7 @@ function log(player, turn, message) {
   p.setAttribute("class", "log");
 
   let spanPlayer = document.createElement("span");
-  spanPlayer.innerHTML = player + " - ";
+  spanPlayer.innerHTML = "<b>" + player + "</b> - ";
   p.appendChild(spanPlayer);
 
   let spanTurn = document.createElement("span");
@@ -154,4 +154,18 @@ function log(player, turn, message) {
   p.appendChild(spanMessage);
 
   cont.appendChild(p);
+
+  cont.scrollTop = cont.scrollHeight;
+}
+
+function logMaster(message) {
+  var cont = document.getElementById("log");
+
+  let p = document.createElement("p");
+  p.setAttribute("class", "log");
+
+  p.innerHTML = message;
+
+  cont.appendChild(p);
+  cont.scrollTop = cont.scrollHeight;
 }
