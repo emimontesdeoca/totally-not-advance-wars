@@ -1,5 +1,8 @@
 var players = [];
 
+/**
+ * Game object
+ */
 class game {
   constructor(player, cpu, mapnumber) {
     /// cpu player
@@ -13,9 +16,10 @@ class game {
     players.push(this.cpu);
   }
 
+  /**
+   * Next round funtion
+   */
   nextRound() {
-   
-
     logMaster("<b>GAME</b> - Finished day <b>" + this.turn + "</b>!");
     this.turn++;
     enableCharactersByTurn(this.turn);
@@ -23,6 +27,9 @@ class game {
     renderCharacters(players);
   }
 
+  /**
+   * Loads first time
+   */
   load() {
     logMaster("<b>GAME</b> - Starting game!");
     generateMap(this.mapnumber);
@@ -39,6 +46,4 @@ class game {
       );
     });
   }
-
-  finishGame() {}
 }

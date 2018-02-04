@@ -28,9 +28,9 @@ var globalTimer = setInterval(() => {
 }, 1000);
 
 /// player
-var player1 = new player(username, 1, 1);
+var player1 = new player(username, 1, player1Size);
 /// cpu
-var cpu = new player("Gary", 2, 1);
+var cpu = new player("Gary", 2, player2Size);
 
 var advancewars = new game(player1, cpu, 2);
 
@@ -50,6 +50,9 @@ myAudio.addEventListener(
 var isPlaying = false;
 // myAudio.play();
 
+/**
+ * Toggles music
+ */
 function togglePlay() {
   if (isPlaying) {
     myAudio.pause();
@@ -73,6 +76,9 @@ document.getElementById("currentDifficulty").innerHTML = difficultyText;
 
 advancewars.load();
 
+/**
+ * Function that exits game
+ */
 function exitGame() {
   window.location.href = "../../dashboard.html";
 }

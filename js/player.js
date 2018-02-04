@@ -5,6 +5,9 @@ const player2_numbers = [18, 19, 20, 21, 22, 23];
 const player1_size = 2;
 const player2_size = 2;
 
+/**
+ * Object player
+ */
 class player {
   constructor(name, team, playersize) {
     this.name = name || "player";
@@ -50,7 +53,9 @@ class player {
         break;
     }
   }
-
+  /**
+   * Checks if the turn is finished
+   */
   checkIfTurnFinished() {
     let cont = 0;
     let res = false;
@@ -64,6 +69,10 @@ class player {
     return res;
   }
 
+  /**
+   * Deletes character, not used
+   * @param {*} index index
+   */
   deleteCharacter(index) {
     this.characters.splice(index, 1);
   }

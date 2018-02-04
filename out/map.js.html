@@ -1,4 +1,32 @@
-const trsize = 15;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: map.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: map.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const trsize = 15;
 const tdsize = 24;
 
 /**
@@ -16,10 +44,10 @@ function generateMap(mapnumber) {
   table.id = "main-table";
   table.className = "theme-table";
   let numbertd = 0;
-  for (let index = 0; index < trsize; index++) {
+  for (let index = 0; index &lt; trsize; index++) {
     let tr = document.createElement("tr");
 
-    for (let i = 0; i < tdsize; i++) {
+    for (let i = 0; i &lt; tdsize; i++) {
       let td = document.createElement("td");
       let id = getLetterByIndex(index) + i;
       td.id = id;
@@ -76,13 +104,13 @@ function enableCharactersByTurn(turn) {
 function renderCharacters(players) {
   players.forEach(player => {
     player.characters.forEach(element => {
-      if (element.hp <= 0) {
+      if (element.hp &lt;= 0) {
         var index = player.characters.indexOf(element);
         console.log("index: " + index);
         player.deleteCharacter(index);
       } else {
         let td = document.getElementById(element.position);
-        // let source_img = (td.innerHTML = "<img src='" + element.source + "'/>");
+        // let source_img = (td.innerHTML = "&lt;img src='" + element.source + "'/>");
 
         let img = document.createElement("img");
         img.src = element.source;
@@ -113,7 +141,7 @@ function renderCharacters(players) {
 function deleteCharactersOnMap() {
   var tds = document.getElementsByTagName("td");
 
-  for (let index = 0; index < tds.length; index++) {
+  for (let index = 0; index &lt; tds.length; index++) {
     const td = tds[index];
     td.source = "";
     td.removeAttribute("player");
@@ -133,7 +161,7 @@ function deleteCharactersOnMap() {
 function deleteClassesTd() {
   let tds = document.getElementsByTagName("td");
 
-  for (let index = 0; index < tds.length; index++) {
+  for (let index = 0; index &lt; tds.length; index++) {
     const element = tds[index];
     element.getAttribute("finished") == "true"
       ? (element.className = "disabled")
@@ -175,7 +203,7 @@ function showMovableTiles(e) {
 
   // arriba
 
-  for (let index = 0; index <= moverange; index++) {
+  for (let index = 0; index &lt;= moverange; index++) {
     let itemid = tds[currpos - index].id.substr(1);
     try {
       let toppos = currpos - index * tdsize;
@@ -188,12 +216,12 @@ function showMovableTiles(e) {
 
         // derecha
 
-        for (let i = 0; i <= moverange - index; i++) {
+        for (let i = 0; i &lt;= moverange - index; i++) {
           try {
             let limit = parseInt(tds[toppos + i].id.substring(1));
             let current = parseInt(tds[toppos].id.substring(1));
 
-            if (limit <= tdsize - 1 && limit >= current) {
+            if (limit &lt;= tdsize - 1 &amp;&amp; limit >= current) {
               tds[toppos + i].className = "move";
               tds[toppos + i].setAttribute("movable", "true");
               tds[toppos + i].addEventListener("click", moveCharacter, false);
@@ -213,12 +241,12 @@ function showMovableTiles(e) {
       // izquierda
 
       try {
-        for (let i = 0; i <= moverange - index; i++) {
+        for (let i = 0; i &lt;= moverange - index; i++) {
           try {
             let limit = parseInt(tds[toppos - i].id.substring(1));
             let current = parseInt(tds[toppos].id.substring(1));
 
-            if (limit >= 0 && limit <= current) {
+            if (limit >= 0 &amp;&amp; limit &lt;= current) {
               tds[toppos - i].className = "move";
               tds[toppos - i].setAttribute("movable", "true");
               tds[toppos - i].addEventListener("click", moveCharacter, false);
@@ -227,7 +255,7 @@ function showMovableTiles(e) {
                 ? (tds[toppos - i].className = "notmove")
                 : null;
 
-              parseInt(tds[toppos - 1 - i].id.substring(1)) <= current
+              parseInt(tds[toppos - 1 - i].id.substring(1)) &lt;= current
                 ? (tds[toppos - 1 - i].className = "notmove")
                 : null;
             }
@@ -239,7 +267,7 @@ function showMovableTiles(e) {
 
   /// abajo
 
-  for (let index = 0; index <= moverange; index++) {
+  for (let index = 0; index &lt;= moverange; index++) {
     try {
       let toppos = currpos + index * tdsize;
       try {
@@ -251,11 +279,11 @@ function showMovableTiles(e) {
 
         // derecha
 
-        for (let i = 0; i <= moverange - index; i++) {
+        for (let i = 0; i &lt;= moverange - index; i++) {
           let limit = parseInt(tds[toppos + i].id.substring(1));
           let current = parseInt(tds[toppos].id.substring(1));
 
-          if (limit <= tdsize - 1 && limit >= current) {
+          if (limit &lt;= tdsize - 1 &amp;&amp; limit >= current) {
             tds[toppos + i].className = "move";
             tds[toppos + i].setAttribute("movable", "true");
             tds[toppos + i].addEventListener("click", moveCharacter, false);
@@ -274,11 +302,11 @@ function showMovableTiles(e) {
       // izquierda
 
       try {
-        for (let i = 0; i <= moverange - index; i++) {
+        for (let i = 0; i &lt;= moverange - index; i++) {
           let limit = parseInt(tds[toppos - i].id.substring(1));
           let current = parseInt(tds[toppos].id.substring(1));
 
-          if (limit >= 0 && limit <= current) {
+          if (limit >= 0 &amp;&amp; limit &lt;= current) {
             tds[toppos - i].className = "move";
             tds[toppos - i].setAttribute("movable", "true");
             tds[toppos - i].addEventListener("click", moveCharacter, false);
@@ -287,7 +315,7 @@ function showMovableTiles(e) {
               ? (tds[toppos - i].className = "notmove")
               : null;
 
-            parseInt(tds[toppos - 1 - i].id.substring(1)) <= current
+            parseInt(tds[toppos - 1 - i].id.substring(1)) &lt;= current
               ? (tds[toppos - 1 - i].className = "notmove")
               : null;
           }
@@ -318,7 +346,7 @@ function showAttackableTiles(e) {
 
   // arriba
 
-  for (let index = 0; index <= moverange; index++) {
+  for (let index = 0; index &lt;= moverange; index++) {
     let itemid = tds[currpos - index].id.substr(1);
     try {
       let toppos = currpos - index * tdsize;
@@ -331,12 +359,12 @@ function showAttackableTiles(e) {
 
         // derecha
 
-        for (let i = 0; i <= moverange - index; i++) {
+        for (let i = 0; i &lt;= moverange - index; i++) {
           try {
             let limit = parseInt(tds[toppos + i].id.substring(1));
             let current = parseInt(tds[toppos].id.substring(1));
 
-            if (limit <= tdsize - 1 && limit >= current) {
+            if (limit &lt;= tdsize - 1 &amp;&amp; limit >= current) {
               tds[toppos + i].getAttribute("player") != null
                 ? (tds[toppos + i].className = "notmove")
                 : null;
@@ -348,7 +376,7 @@ function showAttackableTiles(e) {
                 tds[toppos + i].className = "notmove";
               } else if (
                 tds[toppos + i].getAttribute("player") !=
-                  tds[currpos].getAttribute("player") &&
+                  tds[currpos].getAttribute("player") &amp;&amp;
                 tds[toppos + i].getAttribute("player") != null
               ) {
                 tds[toppos + i].setAttribute("attackable", "true");
@@ -371,12 +399,12 @@ function showAttackableTiles(e) {
       // izquierda
 
       try {
-        for (let i = 0; i <= moverange - index; i++) {
+        for (let i = 0; i &lt;= moverange - index; i++) {
           try {
             let limit = parseInt(tds[toppos - i].id.substring(1));
             let current = parseInt(tds[toppos].id.substring(1));
 
-            if (limit >= 0 && limit <= current) {
+            if (limit >= 0 &amp;&amp; limit &lt;= current) {
               if (
                 tds[toppos - i].getAttribute("player") ==
                 tds[currpos].getAttribute("player")
@@ -384,7 +412,7 @@ function showAttackableTiles(e) {
                 tds[toppos - i].className = "notmove";
               } else if (
                 tds[toppos - i].getAttribute("player") !=
-                  tds[currpos].getAttribute("player") &&
+                  tds[currpos].getAttribute("player") &amp;&amp;
                 tds[toppos - i].getAttribute("player") != null
               ) {
                 tds[toppos - i].setAttribute("attackable", "true");
@@ -396,7 +424,7 @@ function showAttackableTiles(e) {
                 );
               }
 
-              parseInt(tds[toppos - 1 - i].id.substring(1)) <= current
+              parseInt(tds[toppos - 1 - i].id.substring(1)) &lt;= current
                 ? (tds[toppos - 1 - i].className = "notmove")
                 : null;
             }
@@ -408,7 +436,7 @@ function showAttackableTiles(e) {
 
   /// abajo
 
-  for (let index = 0; index <= moverange; index++) {
+  for (let index = 0; index &lt;= moverange; index++) {
     try {
       let toppos = currpos + index * tdsize;
       try {
@@ -420,11 +448,11 @@ function showAttackableTiles(e) {
 
         // derecha
 
-        for (let i = 0; i <= moverange - index; i++) {
+        for (let i = 0; i &lt;= moverange - index; i++) {
           let limit = parseInt(tds[toppos + i].id.substring(1));
           let current = parseInt(tds[toppos].id.substring(1));
 
-          if (limit <= tdsize - 1 && limit >= current) {
+          if (limit &lt;= tdsize - 1 &amp;&amp; limit >= current) {
             if (
               tds[toppos + i].getAttribute("player") ==
               tds[currpos].getAttribute("player")
@@ -432,7 +460,7 @@ function showAttackableTiles(e) {
               tds[toppos + i].className = "notmove";
             } else if (
               tds[toppos + i].getAttribute("player") !=
-                tds[currpos].getAttribute("player") &&
+                tds[currpos].getAttribute("player") &amp;&amp;
               tds[toppos + i].getAttribute("player") != null
             ) {
               tds[toppos + i].className = "attack";
@@ -450,11 +478,11 @@ function showAttackableTiles(e) {
       // izquierda
 
       try {
-        for (let i = 0; i <= moverange - index; i++) {
+        for (let i = 0; i &lt;= moverange - index; i++) {
           let limit = parseInt(tds[toppos - i].id.substring(1));
           let current = parseInt(tds[toppos].id.substring(1));
 
-          if (limit >= 0 && limit <= current) {
+          if (limit >= 0 &amp;&amp; limit &lt;= current) {
             if (
               tds[toppos - i].getAttribute("player") ==
               tds[currpos].getAttribute("player")
@@ -462,7 +490,7 @@ function showAttackableTiles(e) {
               tds[toppos - i].className = "notmove";
             } else if (
               tds[toppos - i].getAttribute("player") !=
-                tds[currpos].getAttribute("player") &&
+                tds[currpos].getAttribute("player") &amp;&amp;
               tds[toppos - i].getAttribute("player") != null
             ) {
               tds[toppos - i].className = "attack";
@@ -470,7 +498,7 @@ function showAttackableTiles(e) {
               tds[toppos - i].addEventListener("click", attackCharacter, false);
             }
 
-            parseInt(tds[toppos - 1 - i].id.substring(1)) <= current
+            parseInt(tds[toppos - 1 - i].id.substring(1)) &lt;= current
               ? (tds[toppos - 1 - i].className = "notmove")
               : null;
           }
@@ -493,7 +521,7 @@ function showAttackableTiles(e) {
 function SetNotMovableTd() {
   let tds = document.getElementsByTagName("td");
 
-  for (let index = 0; index < tds.length; index++) {
+  for (let index = 0; index &lt; tds.length; index++) {
     const element = tds[index];
     if (element.getAttribute("movable") == "true") {
       element.removeEventListener("click", moveCharacter, false);
@@ -585,3 +613,26 @@ function disableCharacterAfterMoverOrAttack(pos) {
   let charelement = document.getElementById(pos);
   charelement.className = "disabled";
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="character.html">character</a></li><li><a href="game.html">game</a></li><li><a href="player.html">player</a></li></ul><h3>Global</h3><ul><li><a href="global.html#attackCharacter">attackCharacter</a></li><li><a href="global.html#checkIfFinishedGame">checkIfFinishedGame</a></li><li><a href="global.html#clearInformationMenu">clearInformationMenu</a></li><li><a href="global.html#deleteCharactersOnMap">deleteCharactersOnMap</a></li><li><a href="global.html#deleteClassesTd">deleteClassesTd</a></li><li><a href="global.html#disableButtons">disableButtons</a></li><li><a href="global.html#disableCharacterAfterMoverOrAttack">disableCharacterAfterMoverOrAttack</a></li><li><a href="global.html#enableCharactersByTurn">enableCharactersByTurn</a></li><li><a href="global.html#exitGame">exitGame</a></li><li><a href="global.html#finishTurn">finishTurn</a></li><li><a href="global.html#finishTurno">finishTurno</a></li><li><a href="global.html#generateMap">generateMap</a></li><li><a href="global.html#getCharacterByPosition">getCharacterByPosition</a></li><li><a href="global.html#getHpCharacter">getHpCharacter</a></li><li><a href="global.html#getLetterByIndex">getLetterByIndex</a></li><li><a href="global.html#log">log</a></li><li><a href="global.html#logMaster">logMaster</a></li><li><a href="global.html#moveCharacter">moveCharacter</a></li><li><a href="global.html#renderCharacters">renderCharacters</a></li><li><a href="global.html#SetNotMovableTd">SetNotMovableTd</a></li><li><a href="global.html#showAttackableTiles">showAttackableTiles</a></li><li><a href="global.html#showAttackableTilesOfLoadedCharacter">showAttackableTilesOfLoadedCharacter</a></li><li><a href="global.html#showCurrentGameInformation">showCurrentGameInformation</a></li><li><a href="global.html#showFinishMenu">showFinishMenu</a></li><li><a href="global.html#showInformationInMenu">showInformationInMenu</a></li><li><a href="global.html#showMovableTiles">showMovableTiles</a></li><li><a href="global.html#showMovableTilesOfLoadedCharacter">showMovableTilesOfLoadedCharacter</a></li><li><a href="global.html#togglePlay">togglePlay</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Feb 04 2018 21:00:38 GMT+0000 (GMT Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

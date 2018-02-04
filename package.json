@@ -1,0 +1,19 @@
+{
+  "name": "advance-wars-enr",
+  "version": "1.0.0",
+  "description": "A clone of advance wars",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emimontesdeoca/totally-not-fire-emblem.git"
+  },
+  "author": "Emiliano Montesdeoca",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emimontesdeoca/totally-not-fire-emblem/issues"
+  },
+  "homepage": "https://github.com/emimontesdeoca/totally-not-fire-emblem#readme"
+}
