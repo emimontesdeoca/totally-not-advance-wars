@@ -153,6 +153,21 @@ td:hover {
   cursor: url(../resources/hud/menus/mouse.png), auto;
 }
 
+.text-center{
+  text-align: center;
+}
+
+.hud-text {
+  text-align: left;
+  font-size: 20px;
+  background: none;
+  border: none;
+  font-family: "menufont";
+  padding-left: 4px;
+  cursor: url(../resources/hud/menus/mouse.png), auto;
+  text-transform: uppercase;
+}
+
 .hud-buttons:hover {
   color: red;
 }
@@ -185,12 +200,42 @@ td:hover {
   background-image: url(../resources/hud/menus/log.png);
 }
 
+.finish-menu {
+  position: absolute;
+  background-image: url(../resources/hud/menus/finish.png);
+  background-repeat: no-repeat;
+  width: 380px;
+  height: 120px;
+  font-family: "menufont";
+  font-size: 17px;
+  padding-left: 10px;
+  padding-top: 10px;
+  left: 45px;
+  top: 95px;
+  display: none;
+  text-align: left;
+  z-index: 9999 !important;
+}
+
 .log {
   font-family: "menufont";
   font-size: 20px;
   text-transform: uppercase;
   margin: 10px;
   margin-top: 11px;
+}
+
+.menu-container {
+  width: 480px;
+  height: 53px;
+  /* border: 1px solid black; */
+  margin: 0 auto;
+  margin-top: 20px;
+  max-width: 480px;
+  max-height: 120px;
+  overflow: overlay;
+  background-image: url(../resources/hud/menus/menucontainer.png);
+  text-align: center;
 }
 
 ::-webkit-scrollbar {

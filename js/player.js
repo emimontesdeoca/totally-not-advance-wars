@@ -6,14 +6,14 @@ const player1_size = 2;
 const player2_size = 2;
 
 class player {
-  constructor(name, team) {
+  constructor(name, team, playersize) {
     this.name = name || "player";
     this.characters = [];
 
     let ids = [];
     switch (team) {
       case 1:
-        for (let index = 0; index < player1_size; index++) {
+        for (let index = 0; index < playersize; index++) {
           do {
             var id_letter =
               player1_letters[
@@ -31,7 +31,7 @@ class player {
         }
         break;
       case 2:
-        for (let index = 0; index < player2_size; index++) {
+        for (let index = 0; index < playersize; index++) {
           do {
             var id_letter =
               player2_letters[

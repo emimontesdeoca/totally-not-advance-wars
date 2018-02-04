@@ -169,3 +169,45 @@ function logMaster(message) {
   cont.appendChild(p);
   cont.scrollTop = cont.scrollHeight;
 }
+
+function showFinishMenu(turn, armyleft, difficulty, time) {
+  var r = document.getElementById("rounds");
+  var a = document.getElementById("armyleft");
+  var d = document.getElementById("diff");
+  var t = document.getElementById("time");
+
+  r.innerText = turn;
+  a.innerText = armyleft;
+  d.innerText = difficulty;
+  t.innerText = time;
+
+  var s = document.getElementById("score");
+
+  var finalscore = Math.floor(
+    parseInt(turn) * parseInt(armyleft) * parseInt(time) / parseInt(difficulty)
+  );
+
+  s.innerText = finalscore;
+
+  var f = document.getElementById("finishmenu");
+  f.setAttribute("style", "display:initial");
+
+  deleteCharactersOnMap();
+  clearInformationMenu();
+
+  /// Set score
+  let scores = JSON.parse(localStorage.getItem("scores"));
+
+  if (scores == null) {
+    scores = [];
+  }
+  var currentGame = JSON.parse(localStorage.getItem("currentGame"));
+  let obj = {
+    gameId: currentGame.gameId,
+    user: currentGame.user,
+    score: finalscore
+  };
+  scores.push(obj);
+
+  localStorage.setItem("scores", JSON.stringify(scores));
+}

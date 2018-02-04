@@ -14,6 +14,8 @@ class game {
   }
 
   nextRound() {
+   
+
     logMaster("<b>GAME</b> - Finished day <b>" + this.turn + "</b>!");
     this.turn++;
     enableCharactersByTurn(this.turn);
@@ -37,4 +39,6 @@ class game {
       );
     });
   }
+
+  finishGame() {}
 }

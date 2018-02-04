@@ -9,6 +9,7 @@ function generateMap(mapnumber) {
   container.setAttribute("style", "background-image: url(" + string + ");");
 
   let table = document.createElement("table");
+  table.id = "main-table";
   table.className = "theme-table";
   let numbertd = 0;
   for (let index = 0; index < trsize; index++) {
@@ -31,6 +32,8 @@ function generateMap(mapnumber) {
     table.appendChild(tr);
   }
   container.appendChild(table);
+
+ 
 }
 
 function getLetterByIndex(index) {
@@ -57,39 +60,35 @@ function enableCharactersByTurn(turn) {
 }
 
 function renderCharacters(players) {
-
-
-
   players.forEach(player => {
     player.characters.forEach(element => {
       if (element.hp <= 0) {
         var index = player.characters.indexOf(element);
         console.log("index: " + index);
         player.deleteCharacter(index);
-      }else{
+      } else {
         let td = document.getElementById(element.position);
         // let source_img = (td.innerHTML = "<img src='" + element.source + "'/>");
-  
+
         let img = document.createElement("img");
         img.src = element.source;
         img.id = element.position;
-  
+
         img.setAttribute("player", player.name);
         img.setAttribute("finished", element.turnfinished);
         img.addEventListener("click", showInformationInMenu, false);
-  
+
         td.appendChild(img);
-  
+
         td.setAttribute("player", player.name);
         td.setAttribute("finished", element.turnfinished);
         td.addEventListener("click", showInformationInMenu, false);
-  
+
         if (element.turnfinished) {
           img.className = "disabled";
           td.className = "disabled";
         }
       }
-      
     });
   });
 }
@@ -467,7 +466,10 @@ function SetNotMovableTd() {
       element.setAttribute("movable", "false");
     }
 
-    if (element.getAttribute("attackable") == "true" || element.getAttribute("attackable") == "attacker") {
+    if (
+      element.getAttribute("attackable") == "true" ||
+      element.getAttribute("attackable") == "attacker"
+    ) {
       element.removeEventListener("click", attackCharacter, false);
       element.setAttribute("attackable", "false");
     } else {

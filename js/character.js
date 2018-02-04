@@ -90,6 +90,9 @@ class character {
     this.player = player;
   }
   move(pos) {
+    // var a = checkIfFinishedGame();
+    // console.log(a);
+
     var msg =
       "Moved " +
       this.name +
@@ -116,8 +119,32 @@ class character {
     log(this.player.name, advancewars.turn, msg);
     character.hp -= this.attack;
 
-    this.turnfinished = true;
-    this.player.checkIfTurnFinished() == true ? advancewars.nextRound() : null;
+    var a = checkIfFinishedGame();
+    console.log(a);
+
+    if (a == null || a == undefined) {
+      this.turnfinished = true;
+      this.player.checkIfTurnFinished() == true
+        ? advancewars.nextRound()
+        : null;
+    } else {
+      logMaster("<b>GAME</b> - " + a.name + " has lost!");
+
+      clearInterval(globalTimer);
+
+      var armyleft = 0;
+      players.forEach(element => {
+        if (element.name != a.name) {
+          element.characters.forEach(c => {
+            if (c.hp > 0) {
+              armyleft++;
+            }
+          });
+        }
+      });
+
+      showFinishMenu(advancewars.turn, armyleft, difficulty, timer);
+    }
   }
   finishTurn() {
     var msg = "Finished " + this.name + " turn on " + this.position + ".";
@@ -129,4 +156,25 @@ class character {
 
 function getHpCharacter(name) {
   return characters.filter(x => x.name === name)[0].hp;
+}
+
+function checkIfFinishedGame() {
+  var player = null;
+
+  players.filter(element => {
+    var l = element.characters.length;
+    var contador = 0;
+
+    element.characters.forEach(c => {
+      if (c.hp <= 0) {
+        contador++;
+      }
+    });
+
+    if (l == contador) {
+      player = element;
+    }
+  });
+
+  return player;
 }
