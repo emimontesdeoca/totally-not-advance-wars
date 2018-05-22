@@ -1,8 +1,6 @@
-var currentGame = JSON.parse(localStorage.getItem("currentGame"));
-
 /// get current user and difficulty
-var username = currentGame.user.username;
-var difficulty = currentGame.difficulty;
+var username = prompt("Insert username");
+var difficulty = "3";
 var difficultyText = "";
 var player1Size = 0;
 var player2Size = 0;
@@ -37,7 +35,7 @@ var advancewars = new game(player1, cpu, 2);
 var myAudio = new Audio("resources/music/bgm/1.m4a");
 myAudio.addEventListener(
   "ended",
-  function() {
+  function () {
     var rnd = Math.floor(Math.random() * 3) + 0;
 
     this.currentTime = 0;
@@ -63,10 +61,10 @@ function togglePlay() {
   }
 }
 
-myAudio.onplaying = function() {
+myAudio.onplaying = function () {
   isPlaying = true;
 };
-myAudio.onpause = function() {
+myAudio.onpause = function () {
   isPlaying = false;
 };
 
